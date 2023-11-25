@@ -1,3 +1,3 @@
 # OUTPUT
 
-![Output](./Output.png)
+![Output](./output.png)
