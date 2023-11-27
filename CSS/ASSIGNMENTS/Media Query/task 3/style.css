@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.navbar{
+    width: 100%;
+    background-color: #000000;
+    padding: 15px;
+}
+
+.nav-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+.list-item{
+    list-style: none;
+    color: white;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar{
+        background-color: #848383;
+    }
+    .nav-list{
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+}

@@ -1,0 +1,24 @@
+.card{
+    width: 400px;
+    height: 320px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #7fffd4;
+    cursor: pointer;
+    margin: auto;
+}
+
+.card__image{
+    width: 95%;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.card__desc{
+    margin: 25px;
+}
+
+.card:hover{
+    opacity: 0.5;
+}

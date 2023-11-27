@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.img-gallery{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.img-gallery img{
+    width: 30%;
+    margin: 10px;
+}
+
+@media screen and (max-width: 800px){
+    .img-gallery img{
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .img-gallery img{
+        width: 100%;
+    }
+}

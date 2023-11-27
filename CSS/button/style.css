@@ -1,0 +1,45 @@
+* {
+  background-color: #0f0f0f;
+}
+
+button {
+  color: #ffffff;
+  border: none;
+  color: #ff00bf;
+  width: 200px;
+  height: 100px;
+  position: relative;
+  left: 50%;
+  top: 350px;
+  border: 2px solid white;
+  -webkit-box-shadow: 2px -2px 283px -18px rgba(255, 0, 191, 1);
+  -moz-box-shadow: 2px -2px 283px -18px rgba(255, 0, 191, 1);
+  box-shadow: 2px -2px 283px -18px rgba(255, 0, 191, 1);
+  font-size: 20px;
+  background: #ff00bf3b;
+  cursor: pointer;
+}
+
+button:hover {
+  animation: hover 2s;
+}
+
+@keyframes hover {
+  0% {
+    -webkit-box-shadow: 2px -2px 283px 11px rgba(255, 0, 191, 1);
+    -moz-box-shadow: 2px -2px 283px 11px rgba(255, 0, 191, 1);
+    box-shadow: 2px -2px 283px 11px rgba(255, 0, 191, 1);
+    text-shadow: 1px 1px #ff00bf;
+  }
+  50% {
+    -webkit-box-shadow: 2px -2px 283px 35px rgba(255, 0, 191, 1);
+    -moz-box-shadow: 2px -2px 283px 35px rgba(255, 0, 191, 1);
+    box-shadow: 2px -2px 283px 35px rgba(255, 0, 191, 1);
+    text-shadow:2px 2px #ff00bf;
+  }
+  100% {
+    -webkit-box-shadow: 2px -2px 283px 70px rgba(255, 0, 191, 1);
+    -moz-box-shadow: 2px -2px 283px 70px rgba(255, 0, 191, 1);
+    box-shadow: 2px -2px 283px 70px rgba(255, 0, 191, 1);
+  }
+}

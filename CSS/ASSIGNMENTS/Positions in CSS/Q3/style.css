@@ -1,0 +1,18 @@
+.card{
+    display: flex;
+    border: 2px  solid black;
+    padding: 20px;
+    background-color: #f5f5db;
+    width: 95%;
+    margin: auto;
+}
+
+.card__image{
+    width: 500px;
+    /* height: 300px; */
+    height: 300px;
+}
+
+.card__description{
+    font-size: 1.25rem;
+}

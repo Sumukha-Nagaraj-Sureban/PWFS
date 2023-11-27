@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.navbar{
+    background-color: #cccccc;
+    padding: 40px;
+    text-align: center;
+}
+
+@media (max-width: 450px) {
+    .navbar{
+        background-color: blue;
+    }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .container{
+            width: 100%;
+        }
+
+        .leftBar{
+            width: 280px;
+            height: 785px;
+            background-color: yellow;
+            display: inline-block;
+            float: left;
+        }
+
+        .leftBar ul li a::after{
+            content: "("attr(href)")";
+            content: "("attr(id)")";
+        }
+
+        .leftBar ul li a::before¯{
+            content: "("attr(id)")";
+        }
+        
+        .rightBar{
+            height: 785px;
+            width: calc(100% - 300px);
+            display: inline-block;
+            background-color: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="leftBar">
+            <ul>
+                <li><a href="https://google.com" id="user id">google</a></li>
+            </ul>
+        </div>
+        <div class="rightBar"></div>
+    </div>
+</body>
+</html>

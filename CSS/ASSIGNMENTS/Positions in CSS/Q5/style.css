@@ -1,0 +1,29 @@
+.box{
+    position: absolute;
+    height: 185px;
+    width: 190px;
+    margin: auto;
+    margin-top: 10px;
+    color: #ffffff;
+    font-size: 50px;
+    text-align: center;
+
+}
+
+#box1{
+    background-color: #0F0F0F;
+    /* z-index: 1; */
+}
+
+#box2{
+    background-color: #232D3F;
+}
+
+#box3{
+    background-color: #005B41;
+    /* z-index: 2; */
+}
+
+#box4{
+    background-color: #008170;
+}

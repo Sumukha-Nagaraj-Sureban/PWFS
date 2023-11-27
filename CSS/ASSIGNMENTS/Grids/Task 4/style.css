@@ -1,0 +1,42 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 220px);
+    grid-template-rows: repeat(2,220px);
+}
+
+.box{
+    height: 200px;
+    width: 200px;
+    background-color: #cccccc;
+    border-radius: 7px;
+    font-size: 2rem;
+}
+
+.box3{
+    order: -10;
+    background-color: #444444;
+}
+
+.box4{
+    order: -9;
+}
+
+.box5{
+    order: -8;
+    background-color: #444444;
+}
+
+.box6{
+    order: -7;
+}
+
+.box7{
+    order: -6;
+    background-color: #444444;
+}
+
+.box8{
+    order: -5;
+}

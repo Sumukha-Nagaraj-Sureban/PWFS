@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #yolo{
+            background-color: #663399;
+        }
+        .yolo{
+            background-color: #63b74e;
+        }
+        /* id selector has higher priority */
+
+        /* .sibling ~ p{
+            background-color: #63b74e;
+        } */
+
+        .test ~ li{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <p class="yolo" id="yolo">Namaste from Bharat</p>
+    
+
+    <div>
+        <p>item - 1</p>
+        <p class="sibling">item - 2</p>
+        <p>item - 3</p>
+        <p>item - 4</p>
+        <p>item - 5</p>
+    </div>
+
+    <div class="item">
+        <li class="">item-1</li>
+        <li class="test">item-2</li>
+        <li class="">item-3</li>
+        <ul class="">
+            <li>item -4</li>
+        </ul>
+        <li class="">item -5</li>
+    </div>
+</body>
+</html>

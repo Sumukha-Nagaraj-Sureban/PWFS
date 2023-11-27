@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 100%;
+            border: 2px solid black;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .box{
+            width: 200px;
+            border: 2px solid red;
+            cursor: pointer;
+        }
+
+        .box img{
+            width: 200px;
+            height: 140px;
+        }
+
+        .box:hover{
+            animation-name: example;
+            animation-duration: 2s;
+        }
+
+        .box p{
+            display: none;
+        }
+
+        .box:hover p{
+            display: block;
+        }
+        @keyframes example {
+            0%{
+                flex-grow: 0;
+            }
+            50%{
+                flex-grow: 1;
+            }
+            100%{
+                flex-grow: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <img src="https://staticin.sadhguru.org/in/pub/media/catalog/product/2/_/2_169.jpg" alt="">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse, quae.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse, quae.</p>
+            <button>add to cart</button>
+        </div>
+        <div class="box">
+            <img src="https://staticin.sadhguru.org/in/pub/media/catalog/product/2/_/2_169.jpg" alt="">
+        </div>
+        <div class="box">
+            <img src="https://staticin.sadhguru.org/in/pub/media/catalog/product/2/_/2_169.jpg" alt="">
+
+        </div>
+        <div class="box">
+            <img src="https://staticin.sadhguru.org/in/pub/media/catalog/product/2/_/2_169.jpg" alt="">
+
+        </div>
+    </div>
+</body>
+</html>

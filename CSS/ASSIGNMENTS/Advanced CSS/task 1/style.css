@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+}
+
+:root{
+    --primary-button-color: #00b7ff;
+    --secondary-button-color: #6c757d;
+    --button-text-color: #ffffff;
+}
+
+button{
+    border: none;
+    width: 150px;
+    padding: 7px;
+    color: var(--button-text-color);
+    border-radius: 3px;
+}
+
+#primaryBtn{
+    background-color: var(--primary-button-color);
+}
+
+#secondaryBtn{
+    background-color: var(--secondary-button-color);
+}

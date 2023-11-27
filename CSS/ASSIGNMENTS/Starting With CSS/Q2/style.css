@@ -1,0 +1,67 @@
+.intro, .description{
+    border: 2px black dotted;
+}
+
+.intro::first-letter{
+    font-size: 4rem;
+    color: #ff9500;
+}
+
+.intro__image{
+    display: none;
+}
+
+.intro__image--format{
+    border-radius: 5px;
+}
+
+.intro__hoverbutton{
+    position: relative;
+    cursor: pointer;
+}
+
+.intro__hoverbutton--color{
+    color: #ff9500;
+}
+
+.intro__hoverbutton:hover .intro__image{
+    display: block;
+    width: 200px;
+    position: absolute;
+    left: 10%;
+}
+
+.description::first-letter{
+    font-size: 4rem;
+    color: #14bdfa;
+}
+
+.description__hoverbutton{
+    position: relative;
+    cursor: pointer;
+}
+
+.description__meaning{
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+}
+
+.description__meaning--format{
+    width: 150px;
+    color: #ffffff;
+}
+
+.description__hoverbutton--color{
+    color: #14bdfa;
+}
+
+.description__meaning{
+    color: black;
+    display: none;
+}
+
+.description__hoverbutton:hover span{
+    display: block;
+}

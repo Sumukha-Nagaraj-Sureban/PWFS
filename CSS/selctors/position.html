@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        
+        .container{
+            /* position: relative; */
+            background-color: khaki;
+            border: 2px solid red;
+        }
+
+        .box{
+            margin: 5px;
+            display: inline-block;
+            border: 2px solid black;
+            width: 200px;
+            height: 200px;
+        }
+
+        .box3kapapa{
+            border: 2px solid red;
+            height: 200px;
+            width: 200px;
+            position: relative;
+            display: inline-block;
+        }
+
+        #box1{
+
+        }
+
+        #box2{
+
+        }
+
+        #box3{
+            position: absolute;
+            top: 100px;
+            left: 50px;
+        }
+
+        #box4{
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="box1">1</div>
+        <div class="box" id="box2">2</div>
+        <div class="box3kapapa">
+            <div class="box" id="box3">3</div>
+        </div>
+        <!-- <div class="box" id="box3">3</div> -->
+        <div class="box" id="box4">4</div>
+    </div>
+</body>
+</html>

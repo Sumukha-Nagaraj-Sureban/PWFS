@@ -1,0 +1,31 @@
+.container{
+    height: 97vh;
+    display: grid;
+    grid-template-areas: 
+        "nav nav nav nav aside aside"
+        "main main card card aside aside"
+    ;
+    gap: 10px;
+}
+
+.box{
+    background-color: #E74292;
+    border-radius: 7px;
+    font-size: 3rem;
+}
+
+#nav{
+    grid-area: nav;
+}
+
+#aside{
+    grid-area: aside;
+}
+
+#main{
+    grid-area: main;
+}
+
+#card{
+    grid-area: card;
+}

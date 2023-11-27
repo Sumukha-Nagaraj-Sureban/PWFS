@@ -1,0 +1,253 @@
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+.container{
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+}
+
+.details__section{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.logo__section img{
+    width: 80px;
+    height: 80px;
+    margin: 20px;
+}
+
+.navigation__section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.navigation__links__section{
+    margin-left: 60px;
+}
+
+.navigation__link{
+    text-decoration: none;
+    font-size: 15px;
+    color: #000000;
+    font-weight: lighter;
+    margin: 5px;
+}
+
+.navigation__button__section{
+
+}
+
+.navigation__button{
+    padding: 10.139px 15.298px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.navigation__button--orange{
+    background-color: #FB792B;
+    color: #ffffff;
+}
+
+.navigation__button--light{
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.header__section{
+    margin: 30px 0 0 70px;
+}
+
+.header{
+    font-size: 48px;
+}
+
+.motto span{
+    font-size: 32px;
+}
+
+.ticket__controls__list{
+    display: flex;
+    margin-left: 75px;
+    margin-top: 75px;
+    margin: 54px;
+
+}
+
+.ticket__control--dark--ticket{
+    color: #ffffff;
+    background-color: #213D77;
+}
+
+.ticket__control{
+    padding: 10.139px 15.208px;
+    border-radius: 5.069px;
+    border: 1.5px  solid #000000;
+    margin: 5px;
+    font-size: 18.25px;
+    font-weight: 10;
+    cursor: pointer;
+}
+
+.ticket__control--dark--ticket::before{
+    content: "";
+    background-image: url("./images/ticket.png");
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    right: 5px;
+}
+
+.ticket__control--light--done::before{
+    content: "";
+    background-image: url("./images/done.png");
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    right: 5px;
+}
+
+.ticket__control--light--chart::before{
+    content: "";
+    background-image: url("./images/chart.png");
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    right: 5px;
+}
+
+.image__section img{
+    float: right;
+    position: relative;
+    bottom: 600px;
+    height: 975px;
+}
+
+.destination__section{
+    display: flex;
+    flex-direction: column;
+    margin-left: 60px;
+}
+
+.station__selector{
+    width: 72%;
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid #3333331a;
+    border-radius: 10.139px;
+    padding: 10px;
+}
+
+.from__container span,.to__container span{
+    font-size: 12px;
+    color: #333333;
+}
+
+.from__container p, .to__container p{
+    margin: 5px;
+    font-size: 25.347px;
+    font-weight: bolder;
+}
+
+.from__container::after{
+    content: "";
+    background-image: url("./images/arrow.png");
+    background-size: 100%;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    left: 65px;
+    bottom: 40px;
+}
+
+.from__container::before{
+    content: "";
+    background-image: url("./images/ic-search-from-desktop.png");
+    background-size: 100%;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    position: relative;
+    right: 30px;
+    top: 35px;
+}
+
+.to__container::before{
+    content: "";
+    background-image: url("./images/ic-search-to-desktop.png");
+    background-size: 100%;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    position: relative;
+    right: 30px;
+    top: 35px;
+}
+
+.point{
+    position: relative;
+    right: 23px;
+}
+
+.code{
+    position: relative;
+    left: 8px;
+}
+
+.date-modifier__section{
+    width: 72%;
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid #3333331a;
+    border-radius: 10.139px;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.date span{
+    font-size: 12px;
+    color: #333333;
+}
+
+.search__button{
+    width: 75%;
+    height: 70px;
+    margin-top: 30px;
+    background-color: #01BB0A;
+    color: white;
+    border-radius: 10.139px;
+    border: none;
+    font-size: 25.3px;
+}
+
+.search__button::after{
+    content: "";
+    background-image: url("./images/arrow_forward_FILL0_wght400_GRAD0_opsz48\ 1.png");
+    background-size: 100%;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    top: 5px;
+    left: 10px;
+}

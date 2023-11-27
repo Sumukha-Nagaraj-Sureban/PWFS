@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/dashboard.html -->
+<html style="--bottom-side-width: 185px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>New Tab</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/css/style.min.css">
+<style type="text/css" data-vue-ssr-id="7ba32201:0">
+/* stylelint-disable */
+.three-col-layout[data-v-0b972818] { display: grid; align-items: center; grid-template-columns: minmax(var(--15a6c1ae), 1fr) minmax(0, auto) minmax(var(--15a6c1ae), 1fr);
+}
+.three-col-layout.grow-center[data-v-0b972818] { grid-template-columns: var(--15a6c1ae) minmax(auto, var(--6863c08e)) var(--15a6c1ae);
+}
+.three-col-layout--left[data-v-0b972818] { justify-self: end;
+}
+	/* Width 100% largely so quote can fill the width and widening the window will trigger a resize when the text has wrapped */
+.three-col-layout.grow-center .three-col-layout--center[data-v-0b972818] { width: 100%;
+}
+.three-col-layout--right[data-v-0b972818] { justify-self: start;
+}
+.three-col-layout.align-sides-outside[data-v-0b972818] .three-col-layout--left { justify-self: start;
+}
+.three-col-layout.align-sides-outside[data-v-0b972818] .three-col-layout--right { justify-self: end;
+}
+
+</style><style type="text/css" data-vue-ssr-id="53aa786d:0">
+/* stylelint-disable */
+.dashboard[data-v-45b98c80] { position: absolute; inset: 0; z-index: 3; display: grid; grid-template-columns: var(--e6aaf122) minmax(auto, 1fr) var(--e6aaf122); grid-template-rows: var(--460a0c20) minmax(0, var(--3452cacf)) auto minmax(auto, 1fr) auto; overflow: hidden; transition: opacity 0.3s var(--a-curve);
+}
+.full[data-v-45b98c80] { position: absolute; inset: 0;
+}
+
+/*
+top-left and top-right should compete equally for space but will take up more if they have proportionally more content
+However, top-left has minmax(auto, max-content) so that it will never grow to more than its content. This allows base metric
+To use as much room as possible once links has grown to the fullest extent.
+ */
+.top-row[data-v-45b98c80] { grid-column: 1 / -1; grid-row: 1 / span 1; display: grid; grid-template-columns: minmax(auto, max-content) auto; grid-template-rows: auto auto;
+}
+	/* Max width fixes blowout when bookmarks overflows. min-width: 0 causes top-left and top-right to lock to 50% width each which is not ideal */
+.top-bar[data-v-45b98c80] { max-width: var(--dash-width); grid-column: 1 / -1; grid-row: 1 / span 1;
+}
+.top-left[data-v-45b98c80] { height: fit-content; grid-column: 1 / span 1; grid-row: 2 / span 1; display: flex; align-items: flex-start; min-width: 0;
+} /* fit-content is used to ensure the top-left doesn't grow to the height of the top-right */
+.top-right[data-v-45b98c80] { grid-column: 2 / span 1; grid-row: 2 / span 1; min-width: 0; display: flex; flex-direction: row-reverse;
+}
+.top-right[data-v-45b98c80] .metric-item { padding: var(--dash-vertical-margin) var(--dash-metric-side-padding) 10px;
+}
+.sidebar-left[data-v-45b98c80] { grid-column: 1 / span 1; grid-row: 2 / span 3;
+}
+.sidebar-right[data-v-45b98c80] { grid-column: -2 / span 1; grid-row: 2 / span 3;
+}
+.sidebar-left[data-v-45b98c80], .sidebar-right[data-v-45b98c80] { display: flex; flex-direction: column; width: max-content;
+}
+.center-above[data-v-45b98c80] { grid-column: 2 / span 1; grid-row: 2 / span 1;
+}
+.center[data-v-45b98c80], .center-measure[data-v-45b98c80] { grid-column: 2 / span 1; grid-row: 3 / span 1;
+}
+[data-v-45b98c80] .center-below { align-self: center; grid-column: 2 / span 1; grid-row: 4 / span 1; text-align: center; display: flex; flex-direction: column; align-items: center;
+}
+.bottom-row[data-v-45b98c80] { grid-column: 1 / -1; grid-row: 5 / span 1; align-items: end;
+}
+.bottom-left[data-v-45b98c80], .bottom-center[data-v-45b98c80], .bottom-right[data-v-45b98c80] { display: flex; align-items: flex-end;
+}
+.bottom-center[data-v-45b98c80] { flex-grow: 1;
+}
+.dash-overlay[data-v-45b98c80] { position: absolute; inset: 0; z-index: 3; background-color: rgba(0,0,0, var(--opacity-stop-4));
+}
+@media screen and (max-width: 768px) {
+	/* Modify the three-col-layout grid to move the quote above the left and right columns */
+.bottom-row[data-v-45b98c80] { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; grid-template-rows: auto auto !important;
+}
+.bottom-row[data-v-45b98c80] .three-col-layout--left { width: 100%; grid-column: 1 / span 1; grid-row: 2 / span 1;
+}
+.bottom-row[data-v-45b98c80] .three-col-layout--center { grid-column: 1 / -1; grid-row: 1 / span 1;
+}
+.bottom-row[data-v-45b98c80] .three-col-layout--right { grid-column: 2 / span 1; grid-row: 2 / span 1;
+}
+}
+@media screen and (max-width: 450px) {
+.dashboard[data-v-45b98c80] { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+	/* The pomodoro needs to be centered, but the clock should be at the top */
+.center[data-v-45b98c80] { grid-row: 2 / span 2; display: flex; justify-content: center;
+}
+.center[data-v-45b98c80] .pomodoro { align-self: flex-end;
+}
+}
+
+/* .app-dash layout overrides */
+.top-right[data-v-45b98c80] > :first-child .app-dash, .bottom-right[data-v-45b98c80] > :last-child .app-dash { padding-right: var(--dash-side-margin);
+}
+.top-right > .base-metric[data-v-45b98c80]:first-child { padding-right: calc(var(--dash-side-margin) - var(--dash-metric-side-padding));
+}
+.top-right[data-v-45b98c80]:not(.app-hover):hover .needs-hover .app-dash { opacity: 1;
+}
+.bottom-left[data-v-45b98c80] > :first-child .app-dash { padding-left: var(--dash-side-margin);
+}
+
+/* Use negative margin so that app container matches the size of the app dash content for relative positioning of the popup while keeping the padding on the app-dash element for large clickable area. */
+/* TODO: set up for other regions as needed */
+.top-left[data-v-45b98c80] { padding-left: calc(var(--dash-side-margin) - var(--app-dash-padding));
+}
+.top-left[data-v-45b98c80] .app-container:first-child { margin: 0 var(--side-padding) 0 var(--dash-side-margin);
+}
+.top-left[data-v-45b98c80] .app-container:first-child >>> .app-dash { margin: 0 calc(var(--side-padding) * -1) 0 calc(var(--dash-side-margin) * -1); padding-left: var(--dash-side-margin);
+}
+[data-v-45b98c80] .needs-hover:not(.active) .app-dash { opacity: 0; transition: opacity 0.1s var(--a-curve);
+}
+</style><style type="text/css" id="font-override"></style><style type="text/css" data-vue-ssr-id="6626cee0:0">
+/* stylelint-disable */
+.flash-message-container[data-v-f447342a] { position: absolute; inset: 1.5em 0 auto; z-index: 10; display: flex; justify-content: center; pointer-events: none;
+}
+.flash-message[data-v-f447342a] { max-width: 650px; padding: 16px 20px; display: flex; gap: 16px; align-items: center; background-color: var(--color-bg); border-radius: 100px; color: var(--color-text); pointer-events: all; text-shadow: none;
+}
+.icon-alert[data-v-f447342a] { --icon-size: 20px; flex-shrink: 0;
+}
+.v-message a[data-v-f447342a] { color: var(--color-text); text-decoration: underline; transition: opacity 0.05s ease;
+}
+.v-message a[data-v-f447342a]:hover { opacity: 0.8;
+}
+.v-message a[data-v-f447342a]:hover:active { opacity: 1; transition-duration: 0s;
+}
+.close[data-v-f447342a] { margin-right: -4px; margin-left: 3px;
+}
+.close[data-v-f447342a]:after { --icon-wrapper-size: 30px;
+}
+.icon-close[data-v-f447342a] { --icon-size: 10px;
+}
+</style><style type="text/css" data-vue-ssr-id="71232ca8:0">
+/* stylelint-disable */
+.background[data-v-45269796], .background-item[data-v-45269796] { position: absolute; top: 0; right: 0; left: 0; bottom: 0; background-color: transparent; background-position: center center; background-repeat: no-repeat; background-size: cover;
+}
+.background[data-v-45269796] { margin: 0; padding: 0; z-index: 1; transition: transform 0.3s ease-out;
+}
+.background-item[data-v-45269796] { opacity: 1; transition: transform var(--a-show-full-duration) var(--a-show-full-curve);
+}
+.show-full-overlay-active .background-item[data-v-45269796] { transform: scale(1.05);
+}
+.show-full-overlay .background-item[data-v-45269796]:before { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0; opacity: 0; background: rgba(0,0,0,0.5); content: ''; transition: opacity var(--a-show-full-duration) var(--a-show-full-curve);
+}
+.show-full-overlay-active .background-item[data-v-45269796]:before { opacity: 1;
+}
+.background-overlay[data-v-45269796] { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; opacity: 1; background-image: url(chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/26068490522b9f5ca27a.png); background-size: 100% 100%; transition: opacity 0.3s ease-out;
+}
+.background-overlay.slow[data-v-45269796] { transition-duration: 1s;
+}
+.hide-overlay .background-overlay[data-v-45269796] { opacity: 0 !important;
+}
+.fade-enter-active[data-v-45269796], .fade-leave-active[data-v-45269796] { animation: fadein 0.3s ease-out 0s forwards;
+}
+.fade-enter[data-v-45269796], .fade-leave-to[data-v-45269796] { opacity: 0;
+}
+.fade-slow-enter-active[data-v-45269796], .fade-slow-leave-active[data-v-45269796] { animation: fadein 2s ease-out 0s forwards;
+}
+.fade-slow-enter[data-v-45269796], .fade-slow-leave-to[data-v-45269796] { opacity: 0;
+}
+</style><style type="text/css">.todo{text-align:right;text-shadow:none}.todo .app-container{position:relative}.todo .todo-app{height:auto;width:330px;padding:0;position:absolute;display:block;opacity:1;overflow-y:hidden;text-align:left}.todo-app.animating::-webkit-scrollbar-thumb{background-color:rgba(255,255,255,0)!important}.todo .drop-zone{width:37px;position:absolute;top:4px;bottom:4px;z-index:10000;opacity:0;font-size:14px;transition:all .3s ease-out;visibility:hidden;writing-mode:vertical-rl}.todo .bar,.todo .bar:before{position:absolute;top:0;bottom:0;right:0;left:0}.todo .drop-left-zone{left:0}.todo .drop-right-zone{right:0}.todo .has-drop-left .drop-left-zone,.todo .has-drop-right .drop-right-zone{opacity:1;visibility:visible}.todo .bar{padding-top:12px;box-shadow:0 0 10px rgba(0,0,0,.125);text-align:left;transition:all .2s ease}.todo .bar:before{z-index:-1;background:var(--color-stop-4);content:""}.todo .bar-name,.todo .dropdown-wrapper,.todo-header,.todo-header-row{position:relative}.todo .hover .bar:before{background:var(--color-stop-3)}.todo .drop-zone.hover .bar{transform:translateX(0)}.todo .bar-name{font-weight:500;line-height:37px;text-transform:capitalize;transform:scale(0);transition:all .2s ease}.todo .drop-zone.hover .bar-name{transform:scale(1)}.todo .left-bar{overflow:hidden;transform:translateX(-37px)}.todo .left-bar,.todo .left-bar:before{border-radius:0 var(--border-radius) var(--border-radius) 0}.todo .has-drop-left .left-bar{transform:translateX(-29px)}.todo .right-bar{overflow:hidden;transform:translateX(37px)}.todo .right-bar,.todo .right-bar:before{border-radius:var(--border-radius) 0 0 var(--border-radius)}.todo .has-drop-right .right-bar{transform:translateX(29px)}.todo .dropdown{position:absolute;z-index:10}.todo .dropdown li{transition-duration:0s}.todo .dropdown .loading{margin:2px 0;opacity:.7!important;text-align:center}.todo .dropdown .loading:hover{background:0 0}.todo .dropdown.list-integrations{width:220px}.todo .list-integrations .dropdown-list-icon{opacity:1}.todo .icon-tick{height:7px;width:14px;fill:var(--color-icon);vertical-align:6%}.todo-header{--header-padding-top:5px;min-height:var(--header-height);z-index:2;display:block;cursor:pointer!important}.todo-header-row{height:var(--header-height);flex-grow:1;display:flex}.todo .list-color{width:5px;position:absolute;top:11px;bottom:3px;left:0;display:inline;border-bottom-right-radius:3px;border-top-right-radius:3px}.todo .provider-icon{height:20px;padding-right:9px}.momentum-todo .provider-icon{display:none}.todo-ClickUp .provider-icon{margin-top:2px}.dropdown-list-icon.GitHub,.dropdown-list-icon.icon-GitHub,.provider-list li img.GitHub,.provider-logo.GitHub,.todo-GitHub .provider-icon,.todo-Microsoft .provider-icon{filter:var(--filter-dark-brightness)}.todo .list-icon{position:relative;top:2px}.todo .project-chooser{--left-margin:-8px;margin-right:calc(var(--app-padding) * -1);padding-left:var(--app-padding);z-index:5;flex:0 0 auto;display:flex;align-items:center}.todo .project-chooser-toggle{height:var(--chooser-height);margin:2px 5px 0 var(--left-margin);padding:8px 5px 4px 7px;position:relative;display:inline-block;background:rgba(255,255,255,0);border-radius:var(--border-radius);cursor:pointer}.todo .active .project-chooser-toggle{background:rgba(255,255,255,.12)}.todo .project-chooser .icon-wrapper{padding:0;display:block}.todo .project-chooser .icon-wrapper:after{height:auto;width:auto;top:0;right:0;bottom:0;left:0;border-radius:var(--border-radius)}.todo .project-chooser .provider-icon{padding-right:1px}.todo .project-chooser .todo-menu-dropdown-icon{height:16px;width:17px;margin-left:3px;display:inline-block;opacity:.5;cursor:pointer;fill:var(--color-icon)}.todo-provider-wrapper:hover .todo-menu-dropdown-icon{opacity:.8}.project-chooser.active .todo-menu-dropdown-icon{opacity:.6}.todo .project-chooser-dropdown{min-width:230px;margin-top:4px;margin-left:var(--left-margin);top:100%;z-index:100;transition:transform .15s ease}.todo .project-chooser-dropdown .dropdown-list{max-height:209px;overflow:hidden;overflow-y:auto}.todo .project-chooser-dropdown.short-list li:last-child{margin-bottom:20px}.todo .project-chooser-dropdown li:last-child{margin-bottom:4px}.todo-header .project-chooser-dropdown .dropdown-list.available-empty{height:200px}.todo-header .project-chooser-dropdown .available-empty li:last-child{margin-bottom:20px}.todo-header .project-chooser-dropdown li{padding-top:5px;padding-bottom:5px}.todo-header .project-chooser-dropdown .provider-name{margin:4px 0 -1px;opacity:.85;cursor:default;font-weight:600}.todo-header .project-chooser-dropdown .section-title{padding-top:6px;padding-bottom:4px;opacity:.5;cursor:default;font-size:71.42857%;font-weight:500;text-transform:uppercase}.project-chooser-dropdown .provider-name:hover,.project-chooser-dropdown .section-title:hover{background:0 0!important}.todo-header .project-chooser-dropdown .active-item.highlighted{background:var(--color-stop-1)}.todo-header .project-chooser-dropdown .loading-dropdown{opacity:.5;text-align:center}.todo .active-list-container{min-width:0;padding-top:var(--header-padding-top);padding-left:var(--app-padding);flex:1 1 auto;display:inline-flex;align-items:center;transition:all .2s ease}.todo .active-list-name{font-size:20px;overflow:hidden;text-overflow:ellipsis;text-transform:capitalize;white-space:nowrap}.todo .active-list-name.no-caps{text-transform:none}.todo-folders .dropdown{top:var(--header-height);left:var(--safe-zone-padding)}.todo-folders.active .dropdown{display:block}.todo-folders .dropdown.nipple-top-left:after{left:15px}.todo-folders .dropdown .list-chooser{max-height:650px;overflow:auto}.todo .list-chooser-toggle{margin:0 6px;padding:0}.todo .list-chooser-toggle:after{--icon-wrapper-size:22px}.todo .list-chooser-toggle .icon{--icon-size:10px;min-width:0;margin-top:2px}.todo .active-list-container .dropdown{top:var(--header-height)}.todo .list-chooser.nipple-top-left:after{left:28px}.todo .list-chooser li{--padding-v:7px;--padding-h:16px;min-width:240px;padding:var(--padding-v) var(--padding-h);position:relative;font-size:.9375rem;line-height:normal;white-space:nowrap}.todo .list-chooser li:hover{background:var(--hover-bg)}.todo .list-chooser .todo-list-section{padding-left:38px}.todo .list-chooser .list-color{width:4px;top:4px;bottom:2px}.todo .list-chooser .list-name{opacity:.7;line-height:1.2;white-space:initial}.todo .todo-list-choice-active .list-name{opacity:1;font-weight:500}.todo .list-chooser .todo-count{margin-left:3px;opacity:.45;font-size:93.33333%}.todo .list-chooser .todo-list-add-row{max-width:none!important;padding:0!important;list-style:none}.todo .list-chooser .todo-list-add-row li{padding:0}.todo .todo-list-add-input,.todo-list-add-loading{padding:var(--padding-v) var(--padding-h);line-height:normal}.todo .todo-list-add-input{width:100%;opacity:.7;border-bottom:none;cursor:pointer}.todo .input-mode .todo-list-add-input{cursor:text}.todo .todo-list-add-icon{position:absolute;top:var(--padding-v);left:calc(var(--padding-h) - 1px);opacity:.7}.todo .todo-list-add-icon .icon-plus{opacity:.6375;font-size:14px}.todo-list-add-row .upsell-row{padding:5px 16px!important;display:flex;align-items:center}.todo-list-add-row .upsell-row .copy{opacity:.5;font-size:.875rem}.todo-list-add-row .upsell-row .badge{margin-top:1px;margin-left:8px}.todo-folder .icon-folder{--icon-size:14px;margin-right:4px;opacity:.4;vertical-align:-9%}.todo-folder .icon-tick{margin-left:-1px;opacity:.5;transform:rotate(-90deg);vertical-align:8%}.todo-folder.active .icon-tick{-webkit-backface-visibility:hidden;transform:rotate(0)}.todo-folder .todo-list-section{display:none}.todo-folder.active .todo-list-section{display:block}.todo-header-controls{flex:0 0 auto;display:flex}.todo-header .more{height:100%;position:static}.todo-header .mobile-close,.todo-header .more-toggle{padding:var(--header-padding-top) calc(var(--app-padding) - 3px) 0 5px!important;position:relative}.todo-header .mobile-close{margin-left:0}.todo-actions-dropdown{min-width:auto;margin-top:-6px;right:calc(var(--app-padding) - 7px);bottom:auto}.todo-header .dropdown .header{border-bottom:1px solid var(--color-stop-1)}.todo .icon-external{opacity:.35}.todo .icon-autofocus{--icon-size:9px}.todo .icon-assigned{--icon-size:14px}.todo .icon-clear{--icon-size:14px;stroke:var(--color-icon)}.todo .icon-move-to-today{--icon-size:16px;margin-left:-3px}.todo .icon-move-to-today #icon-path-one{fill:var(--color-icon)}.todo .icon-move-to-today #icon-path-two{stroke:var(--color-icon)}.todo-provider-loading.dropdown-detail{bottom:0}.todo-provider-loading .loading{height:100%;margin:0!important;padding:0!important;display:flex;align-items:center;justify-content:center}.todo-list-wrapper{height:100%;width:100%;position:relative;z-index:1;overflow:hidden;transition:max-height .3s ease,min-height .3s ease,padding .3s ease}.todo.has-message .todo-list-wrapper{padding-top:1rem}.todo-list{width:100%;overflow-x:hidden;overflow-y:auto;transition:opacity .2s eas}.todo-list.animating::-webkit-scrollbar-thumb{background-color:rgba(255,255,255,0)!important}.todo-item-active>.todo-item-wrapper,.todo-item.active{background-color:var(--color-stop-1)}.todo-list.drop-top-margin{margin-top:-52px}.todo-list.hide-scroll{overflow-y:hidden}.todo-list.drop-area{padding:10px 0}.todo-list .placeholder{padding:0}.todo-item{position:relative;display:none;opacity:0;font-size:1rem;line-height:1.1875;visibility:hidden}.todo-item.visible{width:100%;display:inline-block;opacity:1;visibility:visible}.todo-item.hidden{display:none}.todo-item.transition{transition:visibility 0s,opacity .4s ease,margin-top .4s ease}.todo-item.drop-area{padding:8px 0}.todo-item label{padding-right:8px;padding-left:var(--app-padding);position:relative;top:1px;z-index:10;display:flex;opacity:1;font-size:1rem}.touch .todo-item label{top:2px}.todo-item input{width:auto}.todo-item-wrapper{padding:3px 0 2px;display:flex;align-items:baseline}.todo-item-title{min-width:0;flex:1 1 auto;display:block;cursor:default;outline:0;word-wrap:break-word}.editing>.todo-item-wrapper .todo-item-title{opacity:.7;outline:0;-webkit-user-select:text;user-select:text}.done>.todo-item-wrapper .todo-item-title{opacity:.5;text-decoration:line-through}.done-list .todo-item-title{opacity:.6;text-decoration:none}.todo-item-title:empty:before{content:"!";visibility:hidden}.todo-item .more{position:static}.todo-item .more-toggle{margin:-3px 0;padding:0 calc(var(--app-padding) - 1px) 0 8px;z-index:2}.todo-item-wrapper:hover .more-toggle{opacity:.525}.editing .more{opacity:0}.todo-item-dropdown{top:20px;right:calc(var(--app-padding) - 5px);bottom:auto}.todo-item-dropdown .list-color{width:4px;margin:0;top:3px;bottom:2px}.todo-item .icon-wrapper:after{--icon-wrapper-size:23px}.todo-item .icon-ellipsis{padding-top:1px}.todo-item .active .icon-wrapper,.todo-item-wrapper:hover .icon-wrapper{opacity:1}.todo-item-active>.todo-item-wrapper{display:block;box-shadow:0 0 0 2px var(--color-stop-1)}.todo-item .control{height:12px;width:12px;position:absolute;right:0;border-radius:100%;cursor:pointer;line-height:12px;text-align:center}.todo-item .error-icon,.todo-item .loading-icon{position:absolute;top:6px;display:none}.todo-item .failed>.todo-item-wrapper .error-icon,.todo-item .loading>.todo-item-wrapper .loading-icon{display:inline-block}.todo-item .failed .destroy,.todo-item .failed .more,.todo-item .loading .destroy,.todo-item .loading .more,.todo-subsection .todo-item-checkbox{display:none}.todo-item .loading-icon{height:10px;width:10px;right:6px;border-width:1px}.todo-item .error-icon{top:4px;right:13px}.todo-section{margin:0;padding:12px var(--app-padding) 6px;opacity:.75;font-size:.75rem;font-weight:700;text-transform:uppercase}.todo-list .todo-section:first-child{padding-top:5px}.todo-section-collapsible{cursor:pointer}.todo-section-collapsible:active,.todo-section-collapsible:hover{opacity:1}.todo-section .icon-tick{margin-left:1px;opacity:.5}.todo-section-collapsed .icon-tick{-webkit-backface-visibility:hidden;transform:rotate(-90deg)}.todo-section-collapsible:hover .icon-tick{opacity:.85}.todo-subsection{cursor:default}.todo-subsection .todo-item-title{margin-left:16px;margin-bottom:-2px;opacity:.7;font-size:13px}.todo-load-more{padding:8px var(--app-padding) 4px;text-align:center}.todo-load-more .todo-load-more-button{padding:7px 21px;border-radius:100px;font-size:12px;transition:opacity .2s ease!important}.todo-load-more .loading{height:28px;position:relative;display:block;line-height:25px}.todo-load-more .loading .loading-icon{margin-right:6px;position:relative;top:-2px;right:auto;left:2px}.todo-load-more .loading .loading-title{opacity:.9;font-size:12px}.todo-load-more .todo-load-more-done{height:28px;opacity:.9;font-size:12px;line-height:25px;transition:opacity .2s ease!important}.todo-list .info{margin-bottom:8px;padding:5px 15px;position:relative;background:#333;color:#ccc}.todo-list .info-hide{height:29px;width:29px;min-width:0;padding:0!important;position:absolute;top:0;right:0;opacity:.5;font-size:70%;line-height:29px;text-align:center}.todo-list .info-title{margin:0 0 1px;font-size:90%}.todo-list .info-description{margin:0;opacity:.5;font-size:85%;line-height:120%}.todo-list .info-action{margin:-3px -15px -5px;padding:5px 15px!important;opacity:.8;font-size:80%}.todo .empty .empty-title{padding:0;opacity:.7;cursor:default}.todo .empty .empty-link{display:inline-block;cursor:pointer;transition:opacity .3s ease}.todo .empty-link .icon{margin-left:3px;font-size:16px;line-height:1;vertical-align:-5%}.todo-list .empty .empty-link:hover{opacity:.8}.todo-list .empty .new-todo-button{transition:opacity .3s ease}.todo-item ol{margin-left:18px}.todo-upsell{min-height:180px}.todo .footer-input{position:static;display:flex;align-items:center;justify-content:space-between}.todo .is-empty .todo-app{overflow:hidden}.todo .is-empty .todo-new{position:absolute;bottom:0}.todo .is-empty .todo-list{visibility:hidden}.todo .is-empty .empty{display:flex}@media screen and (max-width:450px){.todo .todo-header{--header-padding-top:2px;display:flex}.todo-actions-dropdown{right:52px}}</style><style type="text/css" data-vue-ssr-id="2b0e17f0:0">
+/* stylelint-disable */
+.app-container[data-v-35f26472] { order: 100; align-self: flex-start;
+}
+.app-dash[data-v-35f26472] {
+}
+.active .app-dash[data-v-35f26472] { opacity: 1;
+}
+.placeholder[data-v-35f26472] { position: relative; display: inline-block;
+} /* inline-block needed for Firefox */
+.placeholder .hide[data-v-35f26472] { opacity: 0;
+}
+.placeholder .icon-add[data-v-35f26472] { --icon-size: 21px; position: absolute; right: 0; bottom: 4px;
+}
+.Safari .icon-add[data-v-35f26472] { -webkit-transform: translate3d(0, 0, 0);
+} /* fixes subpixel movement when hovering */
+.metric-label[data-v-35f26472] { white-space: nowrap;
+}
+.app[data-v-35f26472] { --app-padding: 27px; text-align: center;
+}
+.title-wrapper[data-v-35f26472] { padding: 0 0 12px;
+}
+.title[data-v-35f26472] { margin: -3px 0 3px; color: var(--color-accent-safe); font-size: 20px; font-weight: 600;
+}
+.description[data-v-35f26472] { margin: 4px 0; opacity: 0.7; font-size: 14px;
+}
+.tiles[data-v-35f26472] { display: flex; justify-content: space-between;
+}
+.tile[data-v-35f26472] { width: 32%; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; border-radius: var(--border-radius); cursor: pointer;
+}
+.tile[data-v-35f26472]:hover { background: var(--color-stop-1);
+}
+.tile[data-v-35f26472]:hover:active { background: var(--color-stop-2);
+}
+[data-v-35f26472] .widget-icon { --size: 24px; height: var(--size); width: var(--size); margin: 5px auto 6px; opacity: 0.9;
+}
+.widget-name[data-v-35f26472] { font-size: 15px;
+}
+.tile .badge[data-v-35f26472] { margin-top: 5px; margin-left: 0;
+}
+.mobile-close[data-v-35f26472] { position: absolute; top: var(--app-padding); right: var(--app-padding);
+}
+@media screen and (max-width: 450px) {
+.app-container[data-v-35f26472] { display: none;
+}
+		/*.app { position: fixed; right: var(--app-offset); }*/
+		/*	.nipple-top-right:after { right: 104px; }*/
+}
+</style><style type="text/css" data-vue-ssr-id="8544ab60:0">
+/* stylelint-disable */
+.toast-hide[data-v-585a48d3] { opacity: 0;
+}
+.toast-visible .icon[data-v-585a48d3] { opacity: 0.8;
+}
+.toast-container[data-v-585a48d3] { height: 0; width: 100%; position: fixed; right: 0; bottom: 0; left: 0; z-index: 100; color: var(--color-text); overflow: visible;
+}
+.toast[data-v-585a48d3] { --toast-padding: calc(var(--app-padding) - 3px); --dropdown-padding: var(--toast-padding); max-width: none !important; margin: 0 !important; padding: 0; position: absolute; top: auto; right: 0 !important; bottom: 0 !important; left: 0 !important; z-index: 2; background-color: var(--color-bg); border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+.toast > *[data-v-585a48d3]:not(.toast-header):first-child { padding-top: calc(var(--app-padding) / 2);
+}
+.toast-header[data-v-585a48d3] { padding: var(--toast-padding); text-align: left;
+}
+[data-v-585a48d3] .toast-title { line-height: 1.25;
+}
+[data-v-585a48d3] .toast-source { margin-top: 4px; opacity: 0.7; font-size: 0.75rem; font-weight: 600;
+}
+.toast-list[data-v-585a48d3] li { max-width: 100% !important;
+}
+.header-line[data-v-585a48d3] { margin: 0 -4px 4px !important;
+}
+.section-title[data-v-585a48d3] { margin: var(--toast-padding); margin-bottom: 5px; opacity: 0.95; font-size: 12px; font-weight: 700; line-height: 1.2; text-align: left; text-transform: uppercase;
+} /* remove line-height when .focus-row { line-height: 120%; } is removed */
+[data-v-585a48d3] .toast .line { height: 1px; margin: 3px var(--toast-padding); background: var(--border-color);
+}
+[data-v-585a48d3] .dropdown-list-item { padding-right: var(--toast-padding); padding-left: var(--toast-padding);
+}
+.button-close[data-v-585a48d3] { margin: var(--toast-padding); margin-top: calc(var(--toast-padding) - 8px); padding: 6px; padding-bottom: 5px; display: block; background: var(--border-color-low) !important; color: var(--color-text) !important; font-size: 12px; line-height: 1.2; text-align: center;
+} /* remove line-height when .focus-row { line-height: 120%; } is removed */
+.button-close[data-v-585a48d3]:active { background: var(--border-color) !important;
+}
+.button-label[data-v-585a48d3] { opacity: 0.8;
+}
+.toast-overlay[data-v-585a48d3] { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; background: hsla(0 0% 0% / 50%);
+}
+.slide-up-enter-active[data-v-585a48d3], .slide-up-leave-active[data-v-585a48d3] { transition: all 0.2s ease;
+}
+.slide-up-enter[data-v-585a48d3], .slide-up-leave-to[data-v-585a48d3]  { transform: translateY(100%);
+}
+</style><style type="text/css" data-vue-ssr-id="060aa3b4:0">
+/* stylelint-disable */
+.photo-info[data-v-47ba3f80] { min-width: 0; flex: 0 1 auto;
+}
+.photo-info .app-dash[data-v-47ba3f80] { height: var(--top-and-bottom-row-min-height); display: flex; justify-content: center; transition: all 0s var(--a-curve), opacity 1s var(--a-curve), transform 1s var(--a-curve);
+}
+.photo-info .app-dash[data-v-47ba3f80]:before { opacity: 0; content: ''; transition: opacity 1s var(--a-curve);
+}
+.photo-info.add-shadow[data-v-47ba3f80]:before { left: -40px; opacity: 0.3;
+}
+.title[data-v-47ba3f80], .source[data-v-47ba3f80] { width: max-content; transition: all 0.3s ease;
+}
+.title[data-v-47ba3f80] { --hover-offset: -2px; padding: 5px 0; display: inline;
+}
+.has-button > .title[data-v-47ba3f80] { --hover-offset: -6px !important;
+}
+.app-dash .title[data-v-47ba3f80] { opacity: 0.8; font-size: 0.8125rem;
+}
+body:not(.touch) .app-dash .title[data-v-47ba3f80] { transform: translateZ(0) translateY(10px);
+}
+body:not(.touch) .photo-info .app-dash:hover .title[data-v-47ba3f80], .photo-info .app-dash.show-hover .title[data-v-47ba3f80] { transform: none;
+}
+.hotkey-hover .title[data-v-47ba3f80] { transition-duration: 1s;
+}
+.source[data-v-47ba3f80] { --show-hover-transition: opacity 0.1s var(--a-curve); display: flex; align-items: center; font-size: 0.6875rem;
+}
+.app-dash .source[data-v-47ba3f80] { opacity: 0; transform: translateZ(0) translateY(-13px);
+}
+.touch .app-dash:not(.show-hover) .source[data-v-47ba3f80] { display: none;
+}
+.app-dash:hover .source[data-v-47ba3f80], .app-dash.show-hover .source[data-v-47ba3f80], .app-dash.pseudo-hover .source[data-v-47ba3f80] { opacity: 1; transform: translateZ(0) translateY(-2px);
+}
+.hotkey-hover .source[data-v-47ba3f80] { transition-duration: 0.8s;
+}
+.source-link[data-v-47ba3f80] { margin: -3px; margin-right: 0px; padding: 3px; opacity: 0.7; cursor: pointer; line-height: 20px; transition: all 0.2s var(--a-curve); vertical-align: top;
+}
+.source-link[data-v-47ba3f80]:hover { opacity: 0.9 !important;
+}
+.touch .source-link[data-v-47ba3f80] { pointer-events: none;
+}
+.control[data-v-47ba3f80] { --size: 16px; height: var(--size); width: var(--size); margin: -2px 0; padding: 2px 1px; position: relative; display: inline-flex; align-items: center; justify-content: center; opacity: 0.7; box-sizing: content-box; cursor: pointer; transition: var(--show-hover-transition);
+}
+.control[data-v-47ba3f80]:hover, .control.active[data-v-47ba3f80] { opacity: 1;
+}
+.control .icon[data-v-47ba3f80] { --icon-size: 14px; height: var(--icon-size); width: var(--icon-size);
+}
+.app-dash.show-hover .control[data-v-47ba3f80] { opacity: 0;
+}
+.app-dash.show-hover:hover .control[data-v-47ba3f80] { opacity: 0.7;
+}
+.app-dash.show-hover .control[data-v-47ba3f80]:hover { opacity: 1;
+}
+
+
+/* Mobile */
+@media screen and (max-width: 450px) {
+.title[data-v-47ba3f80], .source[data-v-47ba3f80] { width: auto;
+}
+.title[data-v-47ba3f80], .source-link[data-v-47ba3f80] { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.title[data-v-47ba3f80] { height: auto; font-size: 0.75rem; font-style: italic; line-height: 1.2;
+}
+}
+</style><style type="text/css" data-vue-ssr-id="90d36f42:0">
+/* stylelint-disable */
+.center-container { display: flex; flex-direction: column;
+}
+</style><style type="text/css">.dropdown-portal[data-v-51133c55]>*{z-index:50}.dropdown-portal[data-v-51133c55] .base-dropdown-container.app{--dropdown-padding: calc(var(--app-padding) - 0.375rem);--dropdown-color: var(--color-text);--dropdown-background-color: var(--color-accent-highlight)}.dropdown-portal[data-v-51133c55] .base-dropdown-container.dash{--dropdown-padding: calc(var(--app-padding) - 0.375rem);--dropdown-color: var(--color-text);--dropdown-background-color: var(--color-bg)}</style><style type="text/css">.full-screen-portals[data-v-3c658925]{position:absolute;inset:0 0 0 0}.full-screen-portals .toast-menu-portal[data-v-3c658925]>*{z-index:45}</style><style type="text/css" data-vue-ssr-id="3b8cc5fd:0">
+/* stylelint-disable */
+
+/*
+	Quote vertical positioning rules:
+	- If the quote is one line: vertically aligned with background info and Notes/To-do app dashes
+	- If the quote is two lines: vertically aligned with background info and Notes/To-do app dashes so that space between two lines is centered
+	- If the quote is more than two lines: respect the dash vertical margin and move the quote up as lines increase
+	When hovered:
+	- Source should translate down to edge of screen, it does not need to respect the dash vertical padding
+	- Body must translate up only as much as necessary, this means it will need to translate more if it is 2+ lines.
+
+	Quote horizontal positioning rules:
+	- Quote body element must extend the entire width of the bottom (middle) region even if the quote is wrapping
+	  to ensure that if the region expands it will trigger the resize observer.
+*/
+.quote[data-v-7268b4e1] { --below-height: 30px; --max-translate-y: calc((var(--below-height) - var(--dash-vertical-margin)) * -1); min-height: var(--top-and-bottom-row-min-height); width: 100%; margin-top: calc(var(--max-translate-y) * -1); padding: 0; display: flex; align-items: center; text-align: center;
+}
+.app-dash[data-v-7268b4e1] { padding: var(--dash-vertical-margin) 5px; flex-basis: 100%;
+}
+.body[data-v-7268b4e1], .below[data-v-7268b4e1] { margin: 0; color: rgba(255,255,255,0.9); line-height: 1.2; transition: all 0.35s 0.1s var(--a-curve);
+}
+.body[data-v-7268b4e1] { --relative-translate-y: calc(50% * -1); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.125rem; -moz-user-select: text; -webkit-user-select: text; user-select: text;
+}
+.quote .app-dash:hover .body[data-v-7268b4e1] { transform: translateY(max(var(--relative-translate-y), var(--max-translate-y)));
+}
+.touch .quote .app-dash:hover .body[data-v-7268b4e1] { transform: translateY(0);
+}
+.below[data-v-7268b4e1] { height: var(--below-height); position: absolute; inset: auto 0 0; opacity: 0; font-size: 0.875rem; transform: translateY(-50%);
+}
+.quote .app-dash:hover .below[data-v-7268b4e1], .quote.pseudo-hover .below[data-v-7268b4e1] { opacity: 1; transform: translateY(0);
+}
+.below-actions[data-v-7268b4e1] { display: flex; align-items: center; justify-content: center;
+}
+.source[data-v-7268b4e1] { margin-right: 4px; opacity: 0.75;
+}
+.below-actions .control[data-v-7268b4e1] { padding: 6px 3px; position: relative; display: inline-flex; align-items: center; justify-content: center; opacity: 0.75; cursor: pointer; line-height: 100%; vertical-align: middle;
+}
+.below-actions .control[data-v-7268b4e1]:hover, .below .control.active[data-v-7268b4e1] { opacity: 1;
+}
+.below-actions .control.skip[data-v-7268b4e1] { padding-left: 2px;
+}
+.below-actions .icon[data-v-7268b4e1] { --icon-size: 16px; display: block;
+}
+
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+.quote[data-v-7268b4e1] { margin-top: 0; padding: 0 10px;
+}
+.quote .body .body-text[data-v-7268b4e1] { font-size: 1rem !important; font-style: italic;
+}
+}
+</style><style type="text/css">.smooth-reflow[data-v-f6d3e6a8]{position:relative}.smooth-reflow.tr-height.tr-width[data-v-f6d3e6a8]{transition:height var(--46e573ab) ease,width var(--46e573ab) ease}.smooth-reflow.tr-height[data-v-f6d3e6a8]{transition:height var(--46e573ab) ease}.smooth-reflow.tr-width[data-v-f6d3e6a8]{display:flex;justify-content:center;transition:width var(--46e573ab) ease}.smooth-reflow.tr-width>div[data-v-f6d3e6a8]{width:fit-content}.smooth-reflow.hide-overflow[data-v-f6d3e6a8]{overflow:hidden}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> .smooth-height-fade-enter-active{transition:opacity var(--7c58a88c) cubic-bezier(0.85, -0.18, 0.66, 0.66)}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> .smooth-height-fade-leave-active{position:absolute !important;top:0;right:0;left:0;transition:opacity var(--7c58a88c) cubic-bezier(0.33, 0.13, 0.33, 1.26)}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> :is(.smooth-height-fade-enter, .smooth-height-fade-leave-to){opacity:0}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> .smooth-width-fade-enter-active{transition:opacity var(--7c58a88c) cubic-bezier(0.85, -0.18, 0.66, 0.66)}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> .smooth-width-fade-leave-active{position:absolute;top:0;left:50%;transform:translateX(-50%);transition:opacity var(--7c58a88c) cubic-bezier(0.33, 0.13, 0.33, 1.26)}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> :is(.smooth-width-fade-enter, .smooth-width-fade-leave-to){opacity:0}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> :is(.smooth-height-slide-left-enter-active, .smooth-height-slide-left-leave-active,
+ .smooth-height-slide-right-enter-active, .smooth-height-slide-right-leave-active){transition:transform 300ms ease}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> :is(.smooth-height-slide-left-leave-active, .smooth-height-slide-right-leave-active){position:absolute;top:0;right:0;left:0}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> :is(.smooth-height-slide-left-leave-to, .smooth-height-slide-right-enter){transform:translateX(-100%)}.smooth-reflow:not(.tr-disabled)>div[data-v-f6d3e6a8]> :is(.smooth-height-slide-left-enter, .smooth-height-slide-right-leave-to){transform:translateX(100%)}</style><style type="text/css">.launchpad-container[data-v-2cef227e]{width:min(clamp(600px,60vw,800px),100%);position:relative;align-self:stretch;margin:auto}.fade-deep-enter-active[data-v-2cef227e].focuses,.fade-deep-enter-active[data-v-2cef227e] .three-col-layout--left,.fade-deep-enter-active[data-v-2cef227e] .search .search-form,.fade-deep-enter-active[data-v-2cef227e] .search .backdrop-filter,.fade-deep-leave-active[data-v-2cef227e].focuses,.fade-deep-leave-active[data-v-2cef227e] .three-col-layout--left,.fade-deep-leave-active[data-v-2cef227e] .search .search-form,.fade-deep-leave-active[data-v-2cef227e] .search .backdrop-filter{transition:opacity .5s ease}.fade-deep-enter[data-v-2cef227e].focuses,.fade-deep-enter[data-v-2cef227e] .three-col-layout--left,.fade-deep-enter[data-v-2cef227e] .search .search-form,.fade-deep-enter[data-v-2cef227e] .search .backdrop-filter,.fade-deep-leave-to[data-v-2cef227e].focuses,.fade-deep-leave-to[data-v-2cef227e] .three-col-layout--left,.fade-deep-leave-to[data-v-2cef227e] .search .search-form,.fade-deep-leave-to[data-v-2cef227e] .search .backdrop-filter{opacity:0}</style><style type="text/css" data-vue-ssr-id="325af400:0">
+/* stylelint-disable */
+.dropdown[data-v-0a952a33] { display: block;
+} /* Override general stylesheet dropdown styling for display: block, but move to this when refactor complete; */
+.dropdown-hide[data-v-0a952a33] { opacity: 0;
+}
+.dropdown-visible .icon[data-v-0a952a33] { opacity: 0.8;
+}
+.open-enter-active[data-v-0a952a33], .open-leave-active[data-v-0a952a33] { transition: opacity 0.1s ease;
+} /* Consolidate this with center nav and other animations? */
+.open-enter[data-v-0a952a33], .open-leave-to[data-v-0a952a33] { opacity: 0;
+}
+
+</style><style type="text/css" data-vue-ssr-id="2d22b64b:0">
+/* stylelint-disable */
+.more-dropdown[data-v-6d452fd6] { display: block;
+} /* TODO. remove this once we remove the use of 'active' class on more icons */
+.search-form[data-v-6d452fd6] { position: relative; margin: 1.0625rem 0.625rem; display: flex;
+}
+.search .search-input[data-v-6d452fd6] { height: calc(24px + 2 * 1.0625rem); width: 100%; max-width: var(--width); margin: -1.0625rem 0; z-index: 2; background: none; border: none; cursor: pointer; line-height: 20px; outline: none;
+}
+.app-dash .search-input[data-v-6d452fd6] { color: #fff;
+}
+.search-underline[data-v-6d452fd6] { margin-top: 17px; position: absolute; top: 50%; right: 0; left: 0; z-index: 1; opacity: 0; border-bottom: 2px solid white; transition: opacity var(--a-fast) var(--a-curve);
+}
+.search:hover .search-underline[data-v-6d452fd6] { opacity: 0.4;
+}
+.search:focus-within .search-underline[data-v-6d452fd6] { opacity: 1;
+}
+.search .search-icon-container[data-v-6d452fd6] { padding: 0 0.25rem 0 0; display: flex; align-items: center; transition: opacity var(--a-fast) var(--a-curve);
+}
+.search .search-icon-container .icon-search[data-v-6d452fd6] { --icon-size: 16px; opacity: 0.85;
+}
+.search:hover .search-icon-container .icon-search[data-v-6d452fd6], .search:focus-within .search-icon-container .icon-search[data-v-6d452fd6] { opacity: 1;
+}
+.search .right-wrapper[data-v-6d452fd6] { display: flex;
+}
+.search .right-wrapper .icon[data-v-6d452fd6] { --icon-size: 16px; height: var(--icon-size); width: var(--icon-size);
+}
+.search .source[data-v-6d452fd6] { display: flex; opacity: 0; transition: var(--a-fast) var(--a-curve);
+}
+.search:hover .source[data-v-6d452fd6] { opacity: 0.65;
+}
+.search:focus-within .source[data-v-6d452fd6] { opacity: 1;
+}
+.search .source-toggle[data-v-6d452fd6] { position: relative; align-self: center; display: flex; align-items: center; justify-content: center; cursor: pointer; outline: none;
+}
+
+				/* Icons */
+.search .source-toggle .icon-dropdown[data-v-6d452fd6] { --icon-size: 14px; display: block; opacity: 0.5; fill: #fff; transition: 0.1s var(--a-curve);
+}
+.source.active .source-toggle .icon-dropdown[data-v-6d452fd6] { opacity: 1; transition-duration: 0s;
+}
+.search .source[data-v-6d452fd6] .dropdown { margin-top: 29px; top: 50%; right: -100px; left: auto;
+}
+.search[data-v-6d452fd6] .dropdown.nipple-top-right:after { right: 14px;
+}
+.search .dropdown .search-provider[data-v-6d452fd6] { outline: none;
+}
+.search .dropdown .icon[data-v-6d452fd6] { max-height: 15px;
+}
+
+					/* TODO: Generalize the padding here to match dropdown li headings (might need to just move this direct to general dropdown styling */
+.search .dropdown .heading[data-v-6d452fd6] { padding: 4px 14px 6px; opacity: 0.75; cursor: default; font-size: 0.625rem; font-weight: 500; text-transform: uppercase;
+}
+.search .dropdown[data-v-6d452fd6] .dropdown-list-icon { --icon-size: 15px;
+}
+.search .dropdown .icon.active[data-v-6d452fd6] { opacity: 1;
+}
+
+
+/* Search in focus */
+.big .search-form[data-v-6d452fd6] { --action-width: 50px; margin: 0; height: 100%;
+}
+.big .search-icon-container[data-v-6d452fd6] { padding: 0 0.8125rem 0 1.5rem; display: flex; align-items: center;
+}
+.big .icon-search[data-v-6d452fd6] { --size: 26px; height: var(--size); width: var(--size); margin: 0; position: relative; top: auto; left: auto; text-shadow: none;
+}
+.big .search-input[data-v-6d452fd6] { height: var(--height); max-width: none; padding: 0 0 1px; font-size: 28px; margin: 0;
+}
+.big .search-input[data-v-6d452fd6]::placeholder { opacity: 0.5; color: #fff;
+}
+.big:focus-within .more[data-v-6d452fd6] { pointer-events: auto;
+}
+.big .right-wrapper .icon[data-v-6d452fd6] { --icon-size: 18px;
+}
+.big .right-wrapper .ask-ai[data-v-6d452fd6] { display: flex; align-items: center; padding: 0 0.625rem; cursor: pointer;
+}
+.big .source.dropdown-visible[data-v-6d452fd6]  { opacity: 1;
+}
+.big .source[data-v-6d452fd6] { opacity: 1;
+}
+.big:hover .source[data-v-6d452fd6] { opacity: 1;
+}
+.big .source-toggle[data-v-6d452fd6] { width: var(--action-width); margin-right: 0; padding-right: 10px; align-self: stretch;
+}
+.big .source-selected[data-v-6d452fd6] { display: flex;
+}
+.big .source-selected .icon-ecosia[data-v-6d452fd6] { --icon-size: 16px; margin-right: -1px;
+}
+
+		/* Review if this specificity/redundancy is necessary */
+.big .source-toggle .icon-dropdown[data-v-6d452fd6], .big .source-toggle .icon-source[data-v-6d452fd6] { transition: var(--a-fast) var(--a-curve);
+}
+.big .source-toggle:hover .icon-dropdown[data-v-6d452fd6], .big .source-toggle:hover .icon-source[data-v-6d452fd6] { opacity: 1;
+}
+.big .dropdown-visible .source-toggle .icon-source[data-v-6d452fd6] { opacity: 1;
+}
+.big:focus-within .source-toggle .icon-source[data-v-6d452fd6] { opacity: 1;
+}
+.big .source-toggle .icon-dropdown[data-v-6d452fd6] { --icon-size: 16px; margin: 0; margin-left: -1px; opacity: 0;
+}
+.big .dropdown-visible .source-toggle .icon-dropdown[data-v-6d452fd6] { opacity: 0.6;
+}
+.big .source[data-v-6d452fd6] .dropdown { margin-top: -2px; top: 100%; right: auto; left: -5px;
+}
+.big .search-underline[data-v-6d452fd6] { display: none;
+}
+
+
+	/* Mobile */
+@media screen and (max-width: 450px) {
+.big .search-form[data-v-6d452fd6] { width: auto;
+}
+.big .search-icon-container[data-v-6d452fd6] { margin-left: -2px;
+}
+.big .icon-search[data-v-6d452fd6] { --size: 20px;
+}
+.big .search-input[data-v-6d452fd6] { font-size: 21px;
+}
+.big .source-toggle .icon-dropdown[data-v-6d452fd6] { opacity: 0.5;
+}
+}
+</style><style type="text/css" data-vue-ssr-id="00d245d5:0">
+/* stylelint-disable */
+.app-popup[data-v-31d89ab8] { --origin-inset: 0px; --top: auto; --bottom: auto; --right: auto; --left: auto; height: calc(100vh - (var(--origin-inset) + var(--app-edge-padding))); width: var(--width); max-width: calc(100vw - (var(--app-edge-padding) * 2)); position: absolute !important; z-index: 2; top: var(--top); bottom: var(--bottom); right: var(--right); left: var(--left); pointer-events: none;
+}
+.app-popup.fullscreen.nipple[data-v-31d89ab8]::after, .app-popup.animating.nipple[data-v-31d89ab8]::after { opacity: 0;
+}
+.app-popup.focused[data-v-31d89ab8] { z-index: 4;
+}
+.app-popup.unfocused > .app[data-v-31d89ab8], .app-popup.unfocused[data-v-31d89ab8]::after { filter: brightness(var(--unfocused-app-brightness)) blur(2px);
+}
+.app[data-v-31d89ab8] { height: auto; min-height: auto; max-height: 100%; max-width: unset !important; position: absolute !important; top: var(--app-top); bottom: var(--app-bottom); right: 0; left: 0; display: flex; flex-direction: column; align-items: stretch; background-color: var(--color-bg); border-radius: var(--border-radius); pointer-events: auto; overflow: hidden;
+}
+.fullscreen:not(.animating) .app[data-v-31d89ab8], .fullscreen:not(.animating) .app[data-v-31d89ab8] > * { border-radius: 0;
+}
+.animating .app[data-v-31d89ab8] { transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease-in-out, right 0.2s ease-in-out, bottom 0.2s ease-in-out, left 0.2s ease-in-out;
+}
+.animating .app[data-v-31d89ab8] > * { opacity: 0;
+}
+.app[data-v-31d89ab8] > * { transition: opacity var(--opacity-anim-duration) ease-in-out;
+}
+.nipple-top-left[data-v-31d89ab8]:after, .nipple-bottom-left[data-v-31d89ab8]:after { left: var(--nipple-displacement);
+}
+.nipple-top-right[data-v-31d89ab8]:after, .nipple-bottom-right[data-v-31d89ab8]:after { right: var(--nipple-displacement);
+}
+		 /* This needs to be in this component (or general stylesheet) or else the transition won't work when the component is async. I don't know why. */
+.slide-down-fade-enter-active[data-v-31d89ab8], .slide-down-fade-leave-active[data-v-31d89ab8], .slide-up-fade-enter-active[data-v-31d89ab8], .slide-up-fade-leave-active[data-v-31d89ab8] { transition: transform 0.2s ease, opacity 0.2s ease, inset 0s;
+} /* inset 0s is to fix a case where the app transitions right when opening if it is flipping horizontal direction */
+.slide-down-fade-enter[data-v-31d89ab8], .slide-down-fade-leave-to[data-v-31d89ab8] { opacity: 0; transform: translateY(-3px);
+}
+.slide-up-fade-enter[data-v-31d89ab8], .slide-up-fade-leave-to[data-v-31d89ab8] { opacity: 0; transform: translateY(3px);
+}
+		 /* An app can be opened in fullscreen mode immediately, so prevent the transform from happening to avoid any weird width/height jumps */
+.slide-down-fade-enter-active.fullscreen[data-v-31d89ab8], .slide-down-fade-leave-active.fullscreen[data-v-31d89ab8], .slide-up-fade-enter-active.fullscreen[data-v-31d89ab8], .slide-up-fade-leave-active.fullscreen[data-v-31d89ab8] { transition: opacity 0.2s ease, inset 0s;
+}
+.slide-down-fade-enter.fullscreen[data-v-31d89ab8], .slide-down-fade-leave-to.fullscreen[data-v-31d89ab8] { opacity: 0; transform: unset;
+}
+.slide-up-fade-enter.fullscreen[data-v-31d89ab8], .slide-up-fade-leave-to.fullscreen[data-v-31d89ab8] { opacity: 0; transform: unset;
+}
+@media screen and (max-width: 450px) {
+.app-popup[data-v-31d89ab8] { height: var(--app-max-height); position: fixed !important;
+}
+.top-row .app-popup[data-v-31d89ab8] { top: var(--app-edge-padding);
+}
+.bottom-row .app-popup[data-v-31d89ab8] { bottom: var(--app-edge-padding);
+}
+.top-left .app-popup[data-v-31d89ab8], .bottom-left .app-popup[data-v-31d89ab8] { left: var(--app-edge-padding);
+}
+.top-right .app-popup[data-v-31d89ab8], .bottom-right .app-popup[data-v-31d89ab8] { right: var(--app-edge-padding);
+}
+.slide-down-fade-enter-active[data-v-31d89ab8], .slide-down-fade-leave-active[data-v-31d89ab8], .slide-up-fade-enter-active[data-v-31d89ab8], .slide-up-fade-leave-active[data-v-31d89ab8] { transition: transform 0.2s ease, opacity 0.2s ease, inset 0s;
+} /* inset 0s is to fix a case where the app transitions right when opening if it is flipping horizontal direction */
+.slide-down-fade-enter[data-v-31d89ab8], .slide-down-fade-leave-to[data-v-31d89ab8] { opacity: 0; transform: translateY(calc(var(--app-translate-amount) * -1));
+}
+.slide-up-fade-enter[data-v-31d89ab8], .slide-up-fade-leave-to[data-v-31d89ab8] { opacity: 0; transform: translateY(var(--app-translate-amount));
+}
+}
+
+</style><style type="text/css" data-vue-ssr-id="0bc565a8:0">
+/* stylelint-disable */
+/* Touch popup */
+.app[data-v-7ef49ad2] .app-body { padding: var(--app-padding);
+}
+.app[data-v-7ef49ad2] .search-underline { display: none;
+}
+.app-dash-icon[data-v-7ef49ad2] { height: var(--top-and-bottom-row-min-height);
+}
+</style><style type="text/css" data-vue-ssr-id="0884785d:0">
+/* stylelint-disable */
+.search[data-v-0c59d224] { --width: 240px; --icon-size: 16px; height: var(--top-and-bottom-row-min-height); width: 100%; max-width: var(--width); position: relative; flex: 2 2 auto; order: 9; display: inline-block; cursor: pointer;
+}
+body:not(.touch) .search[data-v-0c59d224] { flex-basis: 150px; min-width: 150px;
+}
+[data-v-0c59d224] .app-dash { height: var(--top-and-bottom-row-min-height); padding: 0 var(--side-padding);
+}
+[data-v-0c59d224] .app-dash .icon-search { --icon-size: 18px;
+}
+</style><style type="text/css">.touch-overlay.fade-leave-active,.touch-overlay.fade-enter-active{transition:opacity .15s ease}.touch-overlay.fade-leave-to,.touch-overlay.fade-enter{opacity:0}</style><style type="text/css">.app-dash[data-v-2bb3c64e]{white-space:nowrap}</style><style type="text/css" data-vue-ssr-id="18da8300:0">
+/* stylelint-disable */
+.app-container[data-v-1ebbfa5f] { order: 0; align-self: flex-start;
+}
+.app-dash[data-v-1ebbfa5f] { line-height: normal;
+}
+.metric-label[data-v-1ebbfa5f] { white-space: nowrap;
+}
+.metric-stat[data-v-1ebbfa5f] { display: flex; align-items: baseline; justify-content: flex-end;
+}
+.current-icon[data-v-1ebbfa5f] { margin-right: 6px;
+}
+.icon[data-v-1ebbfa5f] { --icon-size: 25px; display: block;
+}
+</style><style type="text/css">.dashlinks{flex:0 0 auto;order:8;--side-padding:10px}.dashlinks-icon-wrapper{min-height:var(--top-and-bottom-row-min-height);max-height:var(--max-height);cursor:pointer;filter:drop-shadow(0 1px 5px rgba(0, 0, 0, .1));transition:opacity .1s ease}.dashlinks-icon-wrapper:hover{opacity:1}.dashlinks-icon-wrapper:active{opacity:.9;transition-duration:0s}.dashlinks .dashlinks-icon{height:18px;width:18px;margin:0;fill:#fff!important;vertical-align:-4%}</style><style type="text/css" data-vue-ssr-id="ee88c396:0">
+/* stylelint-disable */
+.percent-format[data-v-7ad1b549] { top: 65%; opacity: 1; font-size: 25%;
+}
+@media screen and (max-width: 450px) {
+.percent-format[data-v-7ad1b549] { margin-bottom: -3px; top: auto; font-size: 62%;
+}
+}
+</style><style type="text/css">.clocks-reflow[data-v-6e66e530]{max-width:100%}</style><style type="text/css" data-vue-ssr-id="9bb16e44:0">
+/* stylelint-disable */
+/* Using em units for font sizing for focus because it needs to scale down for responsive more than the other regions */
+h3[data-v-df73c7ea] { margin: 0; padding: 0;
+}
+.focuses[data-v-df73c7ea] { width: 100%; position: relative; display: flex; flex-direction: column; gap: 0.5rem; align-items: center; vertical-align: top;
+}
+.focuses[data-v-df73c7ea]::before { height: 450px; width: 100%; max-width: 800px; position: absolute; top: 50%; left: 50%; z-index: -1; background: url(chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/4db99af162d6759d96bd.png) no-repeat 50% 60%; background-size: contain; content: " "; transform: translate3d(-50%, -50%, 0); transition: opacity 0.2s;
+}
+.pomodoro .focuses[data-v-df73c7ea]:before { display: none;
+}
+.focus-wrapper[data-v-df73c7ea] { display: grid; align-items: end; justify-content: center; justify-items: center;
+}
+.focus-inner-wrapper[data-v-df73c7ea], .focus-prompt-wrapper[data-v-df73c7ea] { grid-area: 1 / 1 / 2 / 2;
+}
+.focus-wrapper .greeting[data-v-df73c7ea] { width: 100%; position: relative; display: inline-block !important; overflow: visible;
+}
+.prompt[data-v-df73c7ea] { --input-padding: 4px 2px 1px; min-width: 0; flex-shrink: 1;
+}
+[data-v-df73c7ea] .focus-question { margin: 0; font-size: 2.1875em; font-weight: 400; line-height: normal;
+}
+[data-v-df73c7ea] .focus-input, .prompt .hidden-data[data-v-df73c7ea] { width: 100%; padding: var(--input-padding); display: block; background: 0; border: 0; border-bottom: 2px solid #fff; -webkit-border-radius: 0; color: #fff; font-size: 2.25em; font-weight: 500; line-height: 1.2; outline: none; text-align: center; transition: border-color .2s ease; /* -webkit-border-radius: removes curves on iOS */
+}
+[data-v-df73c7ea] .focus-input::placeholder { color: #fff;
+}
+.prompt .hidden-data[data-v-df73c7ea] { height: 0; padding-top: 0; padding-bottom: 0; display: block; border: none; border-bottom: none; transition: none; visibility: hidden;
+}
+.focus-prompt-wrapper[data-v-df73c7ea] { width: 100%;
+}
+.focus-prompt-wrapper[data-v-df73c7ea] .three-col-layout--center { display: flex; justify-content: center;
+}
+.team-focus-wrapper[data-v-df73c7ea] { position: relative;
+}
+@media screen and (max-width: 450px) {
+.focuses[data-v-df73c7ea] {
+}
+.focuses[data-v-df73c7ea]:before { display: none;
+}
+.focus-wrapper[data-v-df73c7ea] { padding-bottom: 6px;
+}
+.prompt[data-v-df73c7ea] { padding-bottom: 0;
+}
+[data-v-df73c7ea] .focus-question { margin-bottom: 4px !important; font-size: 20px !important;
+} /* Ensure we deep select to target both the actual question and the placeholder one in FocusContent */
+[data-v-df73c7ea] .focus-input { margin-bottom: -2px; font-size: 24px !important;
+}
+[data-v-df73c7ea] .button { --v-padding: 7px; font-size: 0.875rem;
+}
+.team-focus .side-col[data-v-df73c7ea] { flex-basis: 0;
+}
+}
+</style><style type="text/css" data-vue-ssr-id="8bd6bdaa:0">
+/* stylelint-disable */
+.nav[data-v-0876512d] { display: flex;
+}
+.nav-item[data-v-0876512d] { position: relative; display: flex; align-items: center;
+}
+.nav-item .icon[data-v-0876512d] { padding: var(--icon-padding) calc(var(--icon-padding) - 4px); opacity: 0.5; color: var(--color-text);
+}
+.nav-item:first-child .icon[data-v-0876512d] { padding-left: calc(var(--icon-padding) + 2px);
+}
+.nav-item:last-child .icon[data-v-0876512d] { padding-right: calc(var(--icon-padding) + 2px);
+}
+.nav-item:hover .icon[data-v-0876512d] { opacity: 0.8;
+}
+.nav-item:hover:active .icon[data-v-0876512d], .nav-item.active .icon[data-v-0876512d] { opacity: 1 !important;
+}
+.nav-title[data-v-0876512d] { display: none;
+}
+.tooltip[data-v-0876512d] { padding: 3px 5px; position: absolute; top: calc(100% + 2px); left: 50%; z-index: 1; display: none; background: hsla(0deg 0% 15% / 95%); border-radius: 4px; color: white; font-size: 0.8125rem; transform: translateX(-50%); white-space: nowrap;
+}
+.nav-item:hover .tooltip[data-v-0876512d] { display: block;
+}
+.tooltip .badge[data-v-0876512d] { background: rgba(255 255 255 / 20%); color: white;
+}
+
+	/* Mobile */
+.toast .nav[data-v-0876512d] { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-column-gap: 10px;
+}
+.toast .nav-item[data-v-0876512d] { padding: 7px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; box-shadow: inset 0 0 0 1.5px var(--border-color); font-size: 12px;
+}
+.toast .nav-icon[data-v-0876512d] { --size: 22px; height: var(--size); width: var(--size); margin: 3px 0; opacity: 0.5; border-radius: 4px;
+}
+.toast .nav-title[data-v-0876512d] { margin: 1px 0 -1px; display: block; opacity: 0.7; line-height: 1.2;
+} /* remove line-height when .focus-row { line-height: 120%; } is removed */
+.toast .tooltip[data-v-0876512d] { display: none;
+}
+.toast .nav-item.active[data-v-0876512d], .toast .nav-item[data-v-0876512d]:active { background: var(--border-color); box-shadow: none;
+}
+.toast .nav-item.active .nav-icon[data-v-0876512d], .toast .nav-item.active .nav-title[data-v-0876512d] { opacity: 1;
+}
+
+</style><style type="text/css" data-vue-ssr-id="308bbf0a:0">
+/* stylelint-disable */
+.container[data-v-f5576a50] { --icon-padding: 11px; margin-right: 20px; position: relative; z-index: 1; display: flex; align-items: center;
+}
+[data-v-f5576a50] .icon { --icon-size: 24px; padding: var(--icon-padding); box-sizing: content-box; cursor: pointer; vertical-align: top;
+}
+.icon-toggle[data-v-f5576a50] { --icon-size: 22px; --icon-padding: 12px;
+}
+.dash-icon-wrapper[data-v-f5576a50] { padding: 0; vertical-align: top;
+}
+.dash-icon-wrapper[data-v-f5576a50]:after { --icon-wrapper-size: 46px;
+}
+.dash-icon[data-v-f5576a50] { opacity: 0;
+}
+.dash-icon[data-v-f5576a50]:hover { opacity: 1;
+}
+
+	/* Ensure the negative side margin matches the nav-item first/last child padding */
+.nav[data-v-f5576a50] { margin: 0 -2px; position: absolute; top: 0; right: 0; background: var(--color-bg); border-radius: 100px;
+}
+.open-to-right .nav[data-v-f5576a50] { right: auto; left: 0;
+}
+.open-enter-active[data-v-f5576a50], .open-leave-active[data-v-f5576a50] { transition: opacity 0.1s ease;
+}
+.open-enter[data-v-f5576a50], .open-leave-to[data-v-f5576a50] { opacity: 0;
+}
+@media screen and (max-width: 450px) {
+.container[data-v-f5576a50] { --icon-size: 22px;
+}
+.icon[data-v-f5576a50] { padding-right: 10px;
+}
+}
+</style><style type="text/css" data-vue-ssr-id="e0fac5b2:0">
+/* stylelint-disable */
+.greeting .content[data-v-f022c9da] { display: inline;
+}
+.name-punctuation-no-wrap[data-v-f022c9da] { white-space: nowrap;
+}
+.greeting .name-wrapper[data-v-f022c9da] { position: relative; white-space: nowrap;
+}
+.greeting .name[data-v-f022c9da], .greeting .hidden-span[data-v-f022c9da] { max-width: min(100%, 12em); display: inline-block;
+}
+.hidden-span[data-v-f022c9da] { visibility: hidden;
+}
+.greeting .name[data-v-f022c9da] { border-radius: 3px; outline: none; overflow: hidden; vertical-align: top; white-space: nowrap;
+}
+input.name[data-v-f022c9da] { padding: 0; position: absolute; inset: 0;
+}
+.input-wrapper[data-v-f022c9da] { margin: -5px -2px -8px; padding: 5px 2px 8px; position: relative;
+}
+.greeting .name.editing[data-v-f022c9da], .greeting .hidden-span[data-v-f022c9da] { min-width: 1.5em;
+}
+.greeting .name.editing[data-v-f022c9da] { border: none; font-weight: 500; text-align: center; border-bottom: 3px solid white; border-bottom-left-radius: 0; border-bottom-right-radius: 0; cursor: auto;
+}
+.f--quirky .greeting .name.editing[data-v-f022c9da], .f--startup .greeting .name.editing[data-v-f022c9da] { padding-bottom: 0;
+}
+.f--modern .greeting .name.editing[data-v-f022c9da] { padding-bottom: 3px;
+}
+.Firefox .greeting .name.editing[data-v-f022c9da]:after { content: '';
+} /* Necessary to fix bug where moving cursor to right edge of contenteditable name would cause blur event on Firefox */
+</style><style type="text/css" data-vue-ssr-id="41c4b920:0">
+/* stylelint-disable */
+.checkbox[data-v-35209b3f] { position: relative; border: none; line-height: 1; text-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+.checkbox[data-v-35209b3f]:hover, .touch .checkbox[data-v-35209b3f] { opacity: 1;
+}
+.checkbox .icon[data-v-35209b3f] { height: auto; width: auto;
+}
+.checkbox .icon[data-v-35209b3f]:before { width: auto;
+}
+.icon-checkbox[data-v-35209b3f] { position: absolute; top: 0; left: 0; display: none;
+}
+.icon-checkbox-empty[data-v-35209b3f] { display: block;
+}
+.checked .icon-checkbox[data-v-35209b3f] { display: block;
+}
+.checked .icon-checkbox-empty[data-v-35209b3f] { visibility: hidden;
+}
+</style><style type="text/css" data-vue-ssr-id="65df8c70:0">
+/* stylelint-disable */
+.focus .focus-title[data-v-4b996afa] { margin: 17px 0 3px; font-size: 70%; line-height: 120%; text-transform: uppercase;
+}
+.focus-content[data-v-4b996afa] { width: 100%; font-size: 1.875em;
+}
+.focus-row[data-v-4b996afa] { font-size: 2.25rem;
+}
+.center .focus-row[data-v-4b996afa] { max-width: inherit; font-size: var(--font-size-greeting);
+}
+.focus-row[data-v-4b996afa] .three-col-layout--center { display: inline-block;
+}
+.todays-focus[data-v-4b996afa] { max-width: 87.5vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.complete .todays-focus[data-v-4b996afa] { opacity: 0.85; text-decoration: line-through;
+}
+.control[data-v-4b996afa] { opacity: 0; cursor: pointer;
+}
+.focus-wrapper:hover .control[data-v-4b996afa] { opacity: 0.8;
+}
+.complete .control[data-v-4b996afa] { opacity: 1 !important;
+}
+
+			/* set a transition for the checking off */
+.focus-row[data-v-4b996afa] .three-col-layout--left { display: flex; align-items: center;
+}
+.checkbox[data-v-4b996afa] { margin: 0.6rem 0.8rem 0; font-size: 70%;
+}
+.checkbox[data-v-4b996afa] .icon-checkbox { opacity: 0.85;
+}
+.focus-row[data-v-4b996afa] .three-col-layout--right {
+}
+[data-v-4b996afa] .more {
+}
+.focus-row[data-v-4b996afa] .more-toggle { --icon-size: 15px; margin: 0.5rem 0.8rem 0; position: relative;
+}
+.focus-row[data-v-4b996afa] .icon-wrapper .icon-toggle { --icon-padding: 10px;
+}
+.focus-row[data-v-4b996afa] .right .icon-wrapper:after { --icon-wrapper-size: 30px;
+}
+.focus-dropdown[data-v-4b996afa] {
+}
+.focus-dropdown[data-v-4b996afa] .dropdown { margin-top: 4px; left: 8px;
+}
+.focus-dropdown .icon-new[data-v-4b996afa] { height: 9px; transform: rotate(45deg);
+}
+.focus-dropdown .icon-delete[data-v-4b996afa] { height: 10px; margin-top: 1px;
+}
+.focus-dropdown .icon-pomodoro[data-v-4b996afa] { height: 15px;
+}
+.focus-dropdown .icon-autofocus[data-v-4b996afa] { height: 9px;
+}
+.focus-dropdown.shift-to-left[data-v-4b996afa] .more-dropdown { right: -8px; left: auto;
+}
+.focus-dropdown.shift-to-left[data-v-4b996afa] .more-dropdown.nipple-top-left:after { right: 14px; left: auto;
+}
+
+
+
+/* Touch */
+[data-v-4b996afa] .touch >>> .right { flex-basis: 25px;
+} /* Centers the checkbox/focus over on touch */
+
+
+/* Mobile */
+@media screen and (max-width: 450px) {
+.focus-title[data-v-4b996afa] { margin: 2px 0 4px !important; font-size: 17px !important;
+}
+.focus-row[data-v-4b996afa] { font-size: 26px;
+}
+.left[data-v-4b996afa] {
+}
+.checkbox[data-v-4b996afa] { margin-top: 8px; font-size: 76.9%;
+}
+.three-col-layout--center[data-v-4b996afa] {
+}
+.todays-focus[data-v-4b996afa] { margin: 0; /* display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; text-align: left; white-space: unset; <-- 2 line ellipses overflow to explore sometime */
+}
+}
+</style><style type="text/css" data-vue-ssr-id="7e8f7fa7:0">
+/* stylelint-disable */
+.popup[data-v-0b57c0e3] { width: 390px; position: fixed; z-index: 100; overflow: visible;
+}
+.popup.popup-pulse[data-v-0b57c0e3]:before { --size: 26px; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; opacity: 0; animation: 1.8s popup-pulse-0b57c0e3 infinite forwards; border-radius: 20px; box-shadow: inset 0 0 var(--size) calc(var(--size)*0.5) white, 0 0 var(--size) calc(var(--size)*0.5) white; content: '';
+}
+@keyframes popup-pulse-0b57c0e3 {
+0% { opacity: 0.6; transform: scale(1);
+}
+			/*0.1% { opacity: 0.6; }*/
+100% { opacity: 0; transform: scale(1.15);
+}
+}
+.app[data-v-0b57c0e3] { --app-padding: 26px; position: relative; padding: 0;
+}
+.popup.popup-notification .app[data-v-0b57c0e3] { overflow: hidden; box-shadow: 0 4px 175px rgba(0 0 0 / 0.85);
+}
+.popup:not(.popup-notification) .notification-image[data-v-0b57c0e3] { margin-top: 0;
+}
+.popup-content[data-v-0b57c0e3] { padding: var(--app-padding); display: flex; flex-direction: column; gap: 0.5rem;
+}
+.popup-header[data-v-0b57c0e3] { display: flex; flex-direction: column;
+}
+.popup-title[data-v-0b57c0e3] { padding-right: 20px
+}
+.popup-hide[data-v-0b57c0e3] { padding: calc(var(--app-padding) + 6px) var(--app-padding) 13px 13px; position: absolute; top: 0; right: 0; z-index: 1; display: flex; align-items: center; justify-content: center;
+}
+.popup-hide .icon[data-v-0b57c0e3] { fill: var(--color-text);
+}
+.popup-body[data-v-0b57c0e3] { padding-right: 20px; font-size: 0.9375rem; line-height: 1.5;
+}
+.popup-footer[data-v-0b57c0e3] { margin: 6px 0 -1px; display: flex; align-items: center; gap: 0.5rem;
+}
+.button-primary[data-v-0b57c0e3] { margin-right: 15px;
+}
+.button-text[data-v-0b57c0e3] { padding: 10px; opacity: 0.6; background: none; cursor: pointer; font-size: 0.8125rem; display: flex; align-items: center; align-self: stretch; padding: 0 10px 1px;
+}
+.button-text[data-v-0b57c0e3]:hover { opacity: 0.8;
+}
+.button-secondary[data-v-0b57c0e3] { padding: 0 10px; align-self: stretch; display: flex; align-items: center; opacity: 0.7; cursor: pointer; font-size: 14px; font-weight: 500;
+}
+.button-secondary[data-v-0b57c0e3]:hover { opacity: 0.85;
+}
+.button-secondary[data-v-0b57c0e3]:hover:active { opacity: 0.7;
+}
+.popup-notification-footer[data-v-0b57c0e3] { margin: 0.375rem 0 0;
+}
+.popup-notification-footer .button-primary[data-v-0b57c0e3] { margin-right: 0;
+}
+</style><style type="text/css" data-vue-ssr-id="2a30f348:0">
+/* stylelint-disable */
+.tour-feature[data-v-674d557f] { max-width: 550px; position: absolute; display: flex; align-items: center;
+}
+.cta[data-v-674d557f] { max-width: 400px; padding: 1rem; flex-grow: 1; display: flex; flex-direction: column;
+}
+.arrow[data-v-674d557f] { padding: 15px; order: 1; font-size: 14px;
+}
+.arrow.right-below[data-v-674d557f] { align-self: flex-end;
+}
+.arrow.right-above[data-v-674d557f] { align-self: flex-start; transform: rotateX(180deg);
+}
+.arrow.below-left[data-v-674d557f] { align-self: flex-start; transform: rotate(90deg);
+}
+.arrow.below-right[data-v-674d557f] { align-self: flex-end; transform: rotateY(180deg) rotate(90deg);
+}
+.arrow.left-above[data-v-674d557f] { order: -1; align-self: flex-start; transform: rotate(180deg);
+}
+.arrow.left-below[data-v-674d557f] { order: -1; align-self: flex-end; transform: rotateX(180deg) rotate(180deg);
+}
+.arrow.above-right[data-v-674d557f] { order: -1; align-self: flex-end; transform: rotate(-90deg);
+}
+.arrow.above-left[data-v-674d557f] { order: -1; align-self: flex-start; transform: rotateY(180deg) rotate(-90deg);
+}
+.icon-arrow[data-v-674d557f] { height: 60px; width: 60px;
+}
+.sub-step-transition-enter-active .feature[data-v-674d557f], .sub-step-transition-leave-active .feature[data-v-674d557f] { transition: opacity 0.5s ease;
+}
+.sub-step-transition-enter .feature[data-v-674d557f], .sub-step-transition-leave-to .feature[data-v-674d557f] { opacity: 0;
+}
+</style><style type="text/css" data-vue-ssr-id="eb336d00:0">
+/* stylelint-disable */
+.modal-component[data-v-506f601e] { --modal-padding: 40px;
+}
+.fade-slide-down-enter-active[data-v-506f601e], .fade-slide-down-leave-active[data-v-506f601e] { transition: all 0.5s ease-out;
+}
+.fade-slide-down-enter[data-v-506f601e], .fade-slide-down-leave-to[data-v-506f601e] { opacity: 0; transform: translateY(0px);
+}
+.fade-slide-up-enter-active[data-v-506f601e], .fade-slide-up-leave-active[data-v-506f601e] { transition: all 0.5s ease-out;
+}
+.fade-slide-up-enter[data-v-506f601e], .fade-slide-up-leave-to[data-v-506f601e] { opacity: 0; transform: translateY(0px);
+}
+[data-v-506f601e] .opt-out { margin-bottom: 0px; opacity: 0.45; font-size: 0.8125rem; line-height: 1.4;
+}
+[data-v-506f601e] .opt-out-button { margin-left: -3px; padding: 3px; cursor: pointer; text-decoration: underline; white-space: nowrap;
+}
+[data-v-506f601e] .opt-out-button:hover { opacity: 0.75;
+}
+</style><style type="text/css" id="themeCss">:root { --color-hue: 87; --color-sat: 26%; --color-lit: 29%; --color-alpha: 0.95; ;--color-accent-safe: var(--color-dark-text);}</style><meta id="safariTabTheme" name="theme-color" content="hsla(87 26% 29% / 0.95)"></head>
+<body class="f--default Chrome dark dark-full">
+<div class="overlay loading-overlay">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="loading-logo" data-test="loading-logo" style="display: none;" fill="#ccc">
+<path d="M256 0C114.615 0 0 114.615 0 256s114.615 256 256 256 256-114.615 256-256S397.385 0 256 0zm122.763 344.309h-15.484v-95.746c0-34.76-18.012-54.983-47.715-54.983-27.176 0-50.875 20.856-50.875 56.879v93.85h-15.484v-96.695c0-33.5-18.327-54.035-47.083-54.035s-51.507 25.28-51.507 57.827v92.9h-15.483V183.151h15.483v28.756c10.428-16.748 24.964-32.548 53.719-32.548 28.124 0 45.5 16.116 54.352 34.76 10.428-18.012 27.807-34.76 58.143-34.76 38.235 0 61.935 26.86 61.935 67.307z"></path>
+</svg>
+</div>
+<div id="main-view" style="visibility: visible;">
+<div data-v-45269796="" class="backgrounds"><div data-v-45269796="" class="background"><div data-v-45269796="" data-test="background-item" class="background-item" style="background-image: url(&quot;https://momentum.photos/img/ae57c197-bdc8-4656-93a9-3f8210fcab15.jpg?momo_cache_bg_uuid=292286df-e160-4222-87cd-dc9788644e29&quot;);"></div></div> <div data-v-45269796="" class="background-overlay"></div></div>
+<div data-v-45b98c80="" class="dashboard apps" style="--e6aaf122: 0px; --460a0c20: 60px; --3452cacf: 327px;"><div data-v-45b98c80="" class="region full"><div data-v-506f601e="" data-test="modal-container" class="modal-container"><!----> <span data-v-506f601e=""></span></div></div> <div data-v-45b98c80="" class="top-row"><div data-v-45b98c80="" class="region top-bar" data-resize-sensor-id="yk2mh48k"></div> <div data-v-45b98c80="" data-test="top-left" class="region top-left" data-resize-sensor-id="fw5itm"><div id="quicklinks" class="app-container quicklinks links" data-test="undefined" style=""><span class="app-dash toggle Links-toggle" data-test="links-app-dash" data-ob="links-app-dash">Links</span><div class="app-wrapper app-placeholder nipple nipple-top-left">
+	<div class="app links-app calculates-own-max-height" style="height:70px; width:260px">
+		<div class="app-placeholder-loading">
+			<i class="loading-icon"></i>Loading...
+		</div>
+	</div>
+	<div class="touch-overlay"></div>
+</div>
+
+</div><div id="dashlinks" class="dashlinks">
+</div><div data-v-0c59d224="" id="search" data-test="search" class="app-dash app-container search"><div data-v-6d452fd6="" data-v-0c59d224="" class="search-form"><div data-v-6d452fd6="" class="search-underline"></div> <div data-v-6d452fd6="" class="search-icon-container"><svg data-v-6d452fd6="" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-test="icon-search" class="icon dash-icon icon-search"><path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" d="M27.375 4C14.465 4 4 14.465 4 27.375c0 12.909 10.465 23.374 23.375 23.374a23.27 23.27 0 0 0 11.227-2.868c.824-.452 1.858-.349 2.523.316L51.46 58.532a5 5 0 0 0 7.07-7.071L48.198 41.127c-.665-.665-.769-1.7-.317-2.524a23.27 23.27 0 0 0 2.869-11.229C50.749 14.466 40.284 4 27.374 4ZM12 27.375C12 18.883 18.883 12 27.375 12c8.49 0 15.374 6.883 15.374 15.375 0 8.49-6.883 15.374-15.375 15.374-8.49 0-15.374-6.883-15.374-15.375Z"></path></svg></div> <input data-v-6d452fd6="" id="search-input" search-url="https://www.google.com/search?q=" type="text" autocomplete="off" data-test="search-input" placeholder="" class="search-input"> <div data-v-6d452fd6="" class="right-wrapper"><!----> <div data-v-0a952a33="" data-v-6d452fd6="" data-test="more-container" class="more more source more-dash" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="selhq" data-click-outside-mousedown-handler-id="tpj4t" section-title="Search with"><div data-v-6d452fd6="" data-v-0a952a33="" tabindex="0" data-test="provider-toggle" class="source-toggle"><div data-v-6d452fd6="" data-v-0a952a33="" class="source-selected"><img data-v-6d452fd6="" data-v-0a952a33="" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik00NC41IDIwSDI0djguNWgxMS44QzM0LjcgMzMuOSAzMC4xIDM3IDI0IDM3Yy03LjIgMC0xMy01LjgtMTMtMTNzNS44LTEzIDEzLTEzYzMuMSAwIDUuOSAxLjEgOC4xIDIuOWw2LjQtNi40QzM0LjYgNC4xIDI5LjYgMiAyNCAyIDExLjggMiAyIDExLjggMiAyNHM5LjggMjIgMjIgMjJjMTEgMCAyMS04IDIxLTIyIDAtMS4zLS4yLTIuNy0uNS00eiIvPjwvc3ZnPg==" class="icon-google icon icon-source active"></div> <svg data-v-6d452fd6="" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon icon-dropdown"><path xmlns="http://www.w3.org/2000/svg" d="M16.6 8.6L12 13.2 7.4 8.6 6 10l6 6 6-6z"></path></svg></div> <!----></div></div></div></div></div> <div data-v-45b98c80="" class="region top-right"><div data-v-1ebbfa5f="" data-show-anyway="weather" class="app-container weather" data-test="weather" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="e6b2fw" data-click-outside-mousedown-handler-id="wlyck3"><div data-v-2bb3c64e="" data-v-1ebbfa5f="" data-test="app-dash" class="metric-item app-dash toggle add-shadow"><div data-v-1ebbfa5f="" data-v-2bb3c64e="" class="metric-stat"><div data-v-1ebbfa5f="" data-v-2bb3c64e="" class="current-icon"><svg data-v-1ebbfa5f="" viewBox="0 0 512 512" height="512" width="512" xmlns="http://www.w3.org/2000/svg" class="icon"><g xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"><path class="sun" d="M286.698608,195.19194 C286.701746,195.211291 286.704876,195.230644 286.708,195.25 C283.397602,194.589308 280.064615,194.010462 276.708173,193.531488 C222.047966,186.176163 166.598764,207.005625 127.809388,257.234842 C124.575545,256.322507 107.188532,256.127867 107.188532,256.127867 C68.9165123,169.362547 135.544905,96.4237763 208.354122,95.8631512 C268.192335,95.4024018 317.409916,143.638843 319.767977,205.334385 C308.922071,200.783756 297.849133,197.399473 286.698608,195.19194 Z M208,64 C199.167,64 192,56.833 192,48 L192,16 C192,7.167 199.167,0 208,0 C216.833,0 224,7.167 224,16 L224,48 C224,56.833 216.833,64 208,64 Z M332.438,106.167 C326.188,112.417 316.062,112.417 309.813,106.167 C303.563,99.917 303.563,89.792 309.813,83.542 L332.438,60.917 C338.688,54.667 348.813,54.667 355.063,60.917 C361.312,67.167 361.312,77.292 355.063,83.542 L332.438,106.167 Z M16,224 C7.167,224 1.42108547e-14,216.833 1.42108547e-14,208 C1.42108547e-14,199.167 7.167,192 16,192 L48,192 C56.833,192 64,199.167 64,208 C64,216.833 56.833,224 48,224 L16,224 Z M352,208 C352,199.167 359.167,192 368,192 L400,192 C408.833,192 416,199.167 416,208 C416,216.833 408.833,224 400,224 L368,224 C359.167,224 352,216.833 352,208 Z M83.541,106.167 L60.916,83.542 C54.666,77.292 54.666,67.167 60.916,60.917 C67.167,54.667 77.291,54.667 83.541,60.917 L106.166,83.542 C112.417,89.792 112.417,99.917 106.166,106.167 C99.917,112.417 89.792,112.417 83.541,106.167 Z M286.698608,195.19194 C280.528708,157.137359 247.791766,128 208,128 C163.812,128 128,163.812 128,208 C128,221.542 131.688,234.083 137.625,245.25 C167.5,211.812 210.062,192 256,192 C263.003911,192 269.904233,192.560546 276.708173,193.531488 C280.042575,193.98018 283.37404,194.533756 286.698608,195.19194 Z"></path><path class="cloud" d="M400,64 C394.688,64 389.438,64.375 384.208,65.125 C354.334,24.417 307.188,0 256,0 C204.812,0 157.688,24.417 127.792,65.125 C122.562,64.375 117.312,64 112,64 C50.25,64 0,114.25 0,176 C0,237.75 50.25,288 112,288 C125.688,288 139.084,285.5 151.709,280.667 C180.666,305.917 217.5,320 256,320 C294.542,320 331.333,305.917 360.291,280.667 C372.916,285.5 386.312,288 400,288 C461.75,288 512,237.75 512,176 C512,114.25 461.75,64 400,64 Z M400,256 C382.875,256 367.084,250.5 354.062,241.333 C330.584,269.624 295.624,288 256,288 C216.375,288 181.416,269.624 157.938,241.333 C144.938,250.5 129.125,256 112,256 C67.812,256 32,220.188 32,176 C32,131.812 67.812,96 112,96 C122.812,96 133.062,98.208 142.438,102.083 C163.667,60.667 206.291,32 256,32 C305.709,32 348.334,60.667 369.541,102.083 C378.938,98.208 389.209,96 400,96 C444.188,96 480,131.812 480,176 C480,220.188 444.188,256 400,256 Z" transform="translate(0 192)"></path></g></svg></div> <div data-v-1ebbfa5f="" data-v-2bb3c64e="" data-test="temperature" class="current-temp">
+				29°
+			</div></div> <div data-v-1ebbfa5f="" data-v-2bb3c64e="" class="metric-label"><span data-v-1ebbfa5f="" data-v-2bb3c64e="" data-test="location" class="metric-label-name">Bengaluru</span></div></div> <!----> <!----></div><div data-v-35f26472="" class="app-container add-metric needs-hover" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="f8eyy" data-click-outside-mousedown-handler-id="rnchds"><div data-v-35f26472="" data-ob="add-metric" data-test="add-metric-dash" class="app-dash metric-item add-shadow"><div data-v-35f26472="" class="metric-stat"><span data-v-35f26472="" class="placeholder"><span data-v-35f26472="" class="hide">a</span> <svg data-v-35f26472="" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="icon icon-add"><path xmlns="http://www.w3.org/2000/svg" d="M19 32C19 30.3431 20.3431 29 22 29H29V22C29 20.3431 30.3431 19 32 19C33.6569 19 35 20.3431 35 22V29H42C43.6569 29 45 30.3431 45 32C45 33.6569 43.6569 35 42 35H35V42C35 43.6569 33.6569 45 32 45C30.3431 45 29 43.6569 29 42V35H22C20.3431 35 19 33.6569 19 32Z"></path><path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" d="M32 64C49.6731 64 64 49.6731 64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64ZM32 58C46.3594 58 58 46.3594 58 32C58 17.6406 46.3594 6 32 6C17.6406 6 6 17.6406 6 32C6 46.3594 17.6406 58 32 58Z"></path></svg></span></div> <div data-v-35f26472="" class="metric-label"><span data-v-35f26472="" class="metric-label-name">Add</span></div></div> <!----></div></div><div data-v-f447342a="" class="flash-message-container"><!----></div></div> <div data-v-45b98c80="" class="region sidebar-left" data-resize-sensor-id="5mbunj"></div> <div data-v-45b98c80="" class="region center-above"></div> <div data-v-45b98c80="" class="center-measure" data-resize-sensor-id="rgv2rt"></div> <div data-v-45b98c80="" data-test="region-center" class="region center"><div data-test="clock-greeting-mantra" class="center-container"><div data-v-f6d3e6a8="" data-smooth-reflow-id="1v816" data-test="smooth-reflow" class="smooth-reflow tr-height" style="height: 168px; --46e573ab: 500ms; --7c58a88c: 500ms;"><div data-v-f6d3e6a8="" data-resize-sensor-id="4osd8"><div data-v-0b972818="" data-v-6e66e530="" data-v-f6d3e6a8="" class="three-col-layout app-container clock center-clock has-dash-icon" data-show-anyway="clock" data-test="center-clock" style="--15a6c1ae: 66px; --6863c08e: auto;"><div data-v-0b972818="" class="three-col-layout--left" data-resize-sensor-id="z3eyjs"><div data-v-f5576a50="" data-v-6e66e530="" data-test="center-nav" class="container" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="vuvhk3" data-click-outside-mousedown-handler-id="unrw4"><div data-v-f5576a50="" data-test="open-center-nav" data-ob="center-nav" class="icon-wrapper dash-icon-wrapper"><svg data-v-f5576a50="" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="dash-icon icon icon-toggle"><path xmlns="http://www.w3.org/2000/svg" d="M3.879 13.879A3 3 0 108.12 18.12L3.88 13.88zM18.12 8.12A3 3 0 1013.88 3.88L18.12 8.12zm-10 5.758A3 3 0 103.88 18.12L8.12 13.88zM13.88 28.12a3 3 0 104.242-4.242L13.88 28.12zM53 27a3 3 0 106 0h-6zm3-11h3a3 3 0 00-3-3v3zM6 13a3 3 0 100 6v-6zm2.121 5.121l10-10L13.88 3.88l-10 10L8.12 18.12zm-4.242 0l10 10 4.242-4.242-10-10L3.88 18.12zM59 27V16h-6v11h6zm-3-14H6v6h50v-6zM60.121 50.121a3 3 0 10-4.242-4.242l4.242 4.242zM45.88 55.88a3 3 0 104.242 4.242L45.88 55.88zm10-5.758a3 3 0 104.242-4.242L55.88 50.12zM50.12 35.88a3 3 0 10-4.242 4.242l4.242-4.242zM11 37a3 3 0 10-6 0h6zM8 48H5a3 3 0 003 3v-3zm50 3a3 3 0 100-6v6zm-2.121-5.121l-10 10 4.242 4.242 10-10-4.242-4.242zm4.242 0l-10-10-4.242 4.242 10 10 4.242-4.242zM5 37v11h6V37H5zm3 14h50v-6H8v6z"></path></svg></div> <!----></div></div> <div data-v-0b972818="" class="three-col-layout--center"><div data-v-f6d3e6a8="" data-v-6e66e530="" data-smooth-reflow-id="a7kx3s" data-test="smooth-reflow" class="smooth-reflow clocks-reflow tr-width" data-v-0b972818="" style="height: auto; width: 378px; --46e573ab: 100ms; --7c58a88c: 1000ms;"><div data-v-f6d3e6a8="" data-resize-sensor-id="qlvhdg"><div data-v-6e66e530="" data-v-f6d3e6a8=""><span data-v-6e66e530="" data-test="default-clock" class="default-clock"><div data-test="default-clock-time" class="time">16:19</div></span></div></div></div></div> <div data-v-0b972818="" class="three-col-layout--right" data-resize-sensor-id="gc9ucs"><div data-v-0a952a33="" data-v-6e66e530="" data-test="more-container" class="more more-dash" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="bpjpt" data-click-outside-mousedown-handler-id="bv5029" section-title="Clock Settings" data-v-0b972818=""><div data-v-0a952a33="" data-test="more-toggle" data-ob="" class="icon-wrapper more-toggle dash-icon-wrapper u--touch-hide"><svg data-v-0a952a33="" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="icon icon-ellipsis more-icon dash-icon"><path xmlns="http://www.w3.org/2000/svg" d="M8 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM52 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM30 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8z"></path></svg></div> <!----></div></div></div></div></div> <div data-v-f6d3e6a8="" data-smooth-reflow-id="7y414m" data-test="smooth-reflow" class="smooth-reflow tr-height" style="height: 63px; --46e573ab: 500ms; --7c58a88c: 500ms;"><div data-v-f6d3e6a8="" data-resize-sensor-id="af3zs"><div data-v-f6d3e6a8=""><div data-v-0b972818="" class="three-col-layout app-container has-dash-icon greeting" data-show-anyway="greeting" data-test="mantra" style="--15a6c1ae: 40px; --6863c08e: auto;"><div data-v-0b972818="" class="three-col-layout--left" data-resize-sensor-id="sqt73h"></div> <div data-v-0b972818="" class="three-col-layout--center"><span data-v-f022c9da="" data-test="content" class="content" data-v-0b972818=""><span data-v-f022c9da="" data-test="message" class="message">Run your own race</span><span data-v-f022c9da="" class="name-punctuation-no-wrap"><!----><span data-v-f022c9da="" data-test="punctuation">.</span></span></span></div> <div data-v-0b972818="" class="three-col-layout--right" data-resize-sensor-id="ldn0w"><div data-v-0a952a33="" data-test="more-container" class="more more-dash" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="lyewh8" data-click-outside-mousedown-handler-id="toq6l9" section-title="Mantra Actions" data-v-0b972818=""><div data-v-0a952a33="" data-test="more-toggle" data-ob="" class="icon-wrapper more-toggle dash-icon-wrapper u--touch-hide"><svg data-v-0a952a33="" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="icon icon-ellipsis more-icon dash-icon"><path xmlns="http://www.w3.org/2000/svg" d="M8 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM52 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM30 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8z"></path></svg></div> <!----></div></div></div></div></div></div></div></div> <div data-v-2cef227e="" data-test="region-center-below" class="center-below"><div data-v-df73c7ea="" data-v-2cef227e="" data-test="focus" data-show-anyway="focus" class="focuses app-container"><div data-v-df73c7ea="" data-ob="focus-dash" class="focus-wrapper has-dash-icon clock-view"><div data-v-df73c7ea="" class="focus-inner-wrapper" style="opacity: 0; pointer-events: none; visibility: hidden;"><div data-v-df73c7ea="" class="focus"><div data-v-4b996afa="" data-v-df73c7ea="" class="focus-content"><h3 data-v-4b996afa="" class="focus-title">Today</h3> <div data-v-0b972818="" data-v-4b996afa="" class="three-col-layout focus-row" style="--15a6c1ae: 51px; --6863c08e: auto;"><div data-v-0b972818="" class="three-col-layout--left" data-resize-sensor-id="w6o0c"> <div data-v-35209b3f="" data-v-4b996afa="" data-test="complete" class="control checkbox" data-v-0b972818=""><i data-v-35209b3f="" class="icon icon-checkbox-empty"></i> <i data-v-35209b3f="" class="icon icon-checkbox"></i></div></div> <div data-v-0b972818="" class="three-col-layout--center"><div data-v-4b996afa="" data-v-0b972818="" data-test="focus-active" class="todays-focus"></div></div> <div data-v-0b972818="" class="three-col-layout--right" data-resize-sensor-id="6h9ggy"><div data-v-0a952a33="" data-v-4b996afa="" data-test="dropdown" class="more focus-dropdown more-dash" data-just-bound-click-outside-handler="false" data-click-outside-mouseup-handler-id="cedps" data-click-outside-mousedown-handler-id="tgau31" section-title="Focus Actions" data-v-0b972818=""><div data-v-0a952a33="" data-test="more-toggle" data-ob="" class="icon-wrapper more-toggle dash-icon-wrapper u--touch-hide"><svg data-v-0a952a33="" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="icon icon-ellipsis more-icon dash-icon"><path xmlns="http://www.w3.org/2000/svg" d="M8 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM52 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM30 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8z"></path></svg></div> <!----></div></div></div></div></div></div> <div data-v-0b972818="" data-v-df73c7ea="" class="three-col-layout focus-prompt-wrapper" style="opacity: 1; visibility: visible; --15a6c1ae: 0px; --6863c08e: auto;"><div data-v-0b972818="" class="three-col-layout--left" data-resize-sensor-id="4u3ku"></div> <div data-v-0b972818="" class="three-col-layout--center"><div data-v-df73c7ea="" data-v-0b972818="" class="prompt"><h3 data-v-df73c7ea="" data-v-0b972818="" class="focus-question">What is your main focus for today?</h3> <span data-v-df73c7ea="" data-v-0b972818="" class="hidden-data"></span> <input data-v-df73c7ea="" data-v-0b972818="" type="text" data-test="focus-input" autocomplete="off" class="focus-input"></div></div> <div data-v-0b972818="" class="three-col-layout--right" data-resize-sensor-id="t4cb9"></div></div></div> <!----></div> <div data-v-f6d3e6a8="" data-v-2cef227e="" data-smooth-reflow-id="dysr7f" data-test="smooth-reflow" class="smooth-reflow launchpad-container tr-height" style="height: 0px; --46e573ab: 500ms; --7c58a88c: 500ms;"><div data-v-f6d3e6a8="" data-resize-sensor-id="jzal1"><!----></div></div></div> <div data-v-45b98c80="" class="region sidebar-right" data-resize-sensor-id="ry8ub7"></div> <div data-v-0b972818="" data-v-45b98c80="" class="three-col-layout bottom-row grow-center align-sides-outside" style="--15a6c1ae: 185px; --6863c08e: auto;"><div data-v-0b972818="" class="three-col-layout--left" data-resize-sensor-id="71oed5"><div data-v-45b98c80="" data-v-0b972818="" class="region bottom-left"><div id="settings" class="app-container settings" data-test="settings" data-justboundclickoutsidehandler="false" data-clickoutsidemouseuphandlerid="j5qzy4" data-clickoutsidemousedownhandlerid="eujf9t"><span class="app-dash toggle" data-test="settings-toggle" data-ob="settings-toggle"><svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340.274 340.274"><path d="M293.629 127.806l-5.795-13.739c19.846-44.856 18.53-46.189 14.676-50.08l-25.353-24.77-2.516-2.12h-2.937c-1.549 0-6.173 0-44.712 17.48l-14.184-5.719c-18.332-45.444-20.212-45.444-25.58-45.444h-35.765c-5.362 0-7.446-.006-24.448 45.606l-14.123 5.734C86.848 43.757 71.574 38.19 67.452 38.19l-3.381.105-27.27 26.737c-4.138 3.891-5.582 5.263 15.402 49.425l-5.774 13.691C0 146.097 0 147.838 0 153.33v35.068c0 5.501 0 7.44 46.585 24.127l5.773 13.667c-19.843 44.832-18.51 46.178-14.655 50.032l25.353 24.8 2.522 2.168h2.951c1.525 0 6.092 0 44.685-17.516l14.159 5.758c18.335 45.438 20.218 45.427 25.598 45.427h35.771c5.47 0 7.41 0 24.463-45.589l14.195-5.74c26.014 11 41.253 16.585 45.349 16.585l3.404-.096 27.479-26.901c3.909-3.945 5.278-5.309-15.589-49.288l5.734-13.702c46.496-17.967 46.496-19.853 46.496-25.221V151.88c-.005-5.519-.005-7.446-46.644-24.074zM170.128 228.474c-32.798 0-59.504-26.187-59.504-58.364 0-32.153 26.707-58.315 59.504-58.315 32.78 0 59.43 26.168 59.43 58.315-.006 32.177-26.656 58.364-59.43 58.364z" fill="#FFF"></path></svg></span></div><div data-v-47ba3f80="" class="app-container photo-info"><div data-v-47ba3f80="" class="app-dash"><div data-v-47ba3f80="" class="title">Vatra Dornei, Romania</div> <div data-v-47ba3f80="" class="source"><span data-v-47ba3f80="" data-url="https://www.flickr.com/photos/girlabrian/50675997443/" class="source-link">Brian</span> <span data-v-47ba3f80=""><span data-v-47ba3f80="" title="Favorite" class="favorite control"><svg data-v-47ba3f80="" fill="#fff" viewBox="0 0 1000 1000" y="0px" x="0px" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="icon icon-heart">
+<path xmlns="http://www.w3.org/2000/svg" class="outline" d="M42.9,332.9c4.5-73.8,29.8-135.1,76-183.8h1.9l1.9-1.9C179.2,98.4,243.1,74,314.3,74s132.5,22.5,183.8,67.4  c20.5-18,42-32.4,64.5-43.3l1.9-1.9h1.9C602.4,81.4,639.9,74,679.1,74c56.5-1.3,108.1,12.5,155,41.4  c46.8,28.9,82.1,68.7,105.9,119.3v1.9l1.9,3.8c19.2,68,22.5,132.8,9.6,194.4c-12.8,61.6-38.5,117.7-77,168.4  c-39.8,56.5-91.8,111.6-155.9,165.5c0,1.3-0.6,1.9-1.9,1.9c-31.4,28.9-65.8,57.7-103,86.6c-21.8,16-40.7,29.2-56.8,39.5  c-21.2,14.8-38.8,22.1-52.9,22.1l-5.8,1.9l-4.8-1.9c-18-1.9-36.9-11.2-56.8-27.9c-6.4-3.8-13.2-9-20.2-15.4s-12.2-10.6-15.4-12.5  H399C241.2,742.6,135.9,633.5,83.3,536v-1.9C51.9,473.8,38.4,406.7,42.9,332.9z M124.7,342.6c-3.8,55.2,6.7,107.2,31.8,155.9  c47.5,86.6,144.7,186.1,291.6,298.4h1.9c3.8,3.8,9.6,9,17.3,15.4c7.7,6.4,13.8,10.9,18.3,13.5c5.1,3.8,9.9,7.1,14.4,9.6  c5.1-1.3,9.6-3.2,13.5-5.8c14.1-9,30.5-20.9,49.1-35.6c37.2-27.6,70.9-55.8,101.1-84.7c60.3-51.3,108.8-103,145.3-155  c68.7-91.1,87.3-186.7,55.8-286.8c-17.3-36.6-42.3-64.8-75.1-84.7c-32.7-19.9-69-29.2-108.8-27.9c-27.6,0-55.2,5.5-82.8,16.4  c-25,14.1-46.8,32.4-65.4,54.9L502,267.5l-33.7-41.4c-33.4-41.7-78.6-65.1-135.7-70.3s-108.8,11.9-155,51  C146.2,242.2,128.5,287.4,124.7,342.6z"></path>
+<path xmlns="http://www.w3.org/2000/svg" class="fill" d="M41.7,332.9c4.5-73.8,29.9-135.1,76-183.8h1.9l1.9-1.9C178.1,98.4,241.9,74,313.1,74  c71.2,0,132.5,22.5,183.8,67.4c19.4-17.3,41.1-31.8,64.5-43.3l1.9-1.9h1.9C601,81.5,639.3,74,677.9,74c56.5-1.3,108.1,12.5,155,41.4  c46.9,28.9,82.2,68.7,105.9,119.3v1.9l1.9,3.8c19.2,68,22.5,132.8,9.6,194.4c-12.8,61.6-38.5,117.7-77,168.4  c-39.7,56.5-91.7,111.7-155.9,165.5c0.1,1-0.6,1.8-1.5,1.9c-0.1,0-0.3,0-0.4,0c-31.5,28.9-65.8,57.7-103,86.6  c-21.8,16.1-40.7,29.2-56.8,39.5c-21.2,14.7-38.8,22.1-52.9,22.1l-5.8,1.9l-4.8-1.9c-18-1.9-36.9-11.3-56.8-27.9  c-7.2-4.4-14-9.6-20.2-15.4c-7-6.4-12.2-10.6-15.4-12.5h-1.9C240,742.7,134.7,633.6,82.1,536v-1.9C50.7,473.7,37.2,406.7,41.7,332.9  z"></path>
+</svg> <!----></span><span data-v-47ba3f80="" title="Skip" class="skip control"><svg data-v-47ba3f80="" viewBox="0 0 249.05 132.12" class="icon icon-skip" xmlns="http://www.w3.org/2000/svg">
+	<circle xmlns="http://www.w3.org/2000/svg" cx="115.5" cy="108.62" r="23"></circle>
+	<path xmlns="http://www.w3.org/2000/svg" d="M291.5,281A22.5,22.5,0,1,1,269,303.5,22.52,22.52,0,0,1,291.5,281m0-1A23.5,23.5,0,1,0,315,303.5,23.5,23.5,0,0,0,291.5,280Z" transform="translate(-176 -194.88)"></path>
+	<path xmlns="http://www.w3.org/2000/svg" class="arrow" d="M399,257.5a135.18,135.18,0,0,0-41.16-42.17c-22.7-14.74-49.38-21.92-75.15-20.2a108.71,108.71,0,0,0-65.16,27c-19.91,17.5-33.76,41.79-41.18,72.19a13.52,13.52,0,0,0,9.92,16.32,13.66,13.66,0,0,0,3.21.38,13.51,13.51,0,0,0,13.11-10.3c6.07-24.92,17.1-44.54,32.76-58.31a82,82,0,0,1,49.13-20.32c20-1.33,40.81,4.32,58.65,15.9A108.07,108.07,0,0,1,374,268.51l-30,13.2,72.43,40.36,8.6-76Z" transform="translate(-176 -194.88)"></path>
+</svg> <!----></span></span></div></div> <!----></div></div></div> <div data-v-0b972818="" class="three-col-layout--center"><div data-v-45b98c80="" data-v-0b972818="" class="region bottom-center"><div data-v-7268b4e1="" data-test="quote" class="app-container quote"><div data-v-7268b4e1="" data-test="app-dash" class="app-dash" data-resize-sensor-id="62jpv"><p data-v-7268b4e1="" class="body"><span data-v-7268b4e1="" data-test="body-text" class="body-text"><span data-v-7268b4e1="">
+						“More 
+					</span><span data-v-7268b4e1="">
+						people 
+					</span><span data-v-7268b4e1="">
+						would 
+					</span><span data-v-7268b4e1="">
+						learn 
+					</span><span data-v-7268b4e1="">
+						from 
+					</span><span data-v-7268b4e1="">
+						their 
+					</span><span data-v-7268b4e1="">
+						mistakes 
+					</span><span data-v-7268b4e1="">
+						if 
+					</span><span data-v-7268b4e1="">
+						they 
+					</span><span data-v-7268b4e1="">
+						weren't 
+					</span><span data-v-7268b4e1="">
+						so 
+					</span><span data-v-7268b4e1="">
+						busy 
+					</span><span data-v-7268b4e1="">
+						denying 
+					</span><span data-v-7268b4e1="">
+						them.” 
+					</span></span></p> <div data-v-7268b4e1="" class="below"><div data-v-7268b4e1="" data-test="below" class="below-actions u--touch-hide"><span data-v-7268b4e1="" data-test="source" class="source">Harold J. Smith</span> <div data-v-7268b4e1="" title="Favorite" data-test="favorite" class="control favorite"><svg data-v-7268b4e1="" fill="#fff" viewBox="0 0 1000 1000" y="0px" x="0px" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="icon icon-heart">
+<path xmlns="http://www.w3.org/2000/svg" class="outline" d="M42.9,332.9c4.5-73.8,29.8-135.1,76-183.8h1.9l1.9-1.9C179.2,98.4,243.1,74,314.3,74s132.5,22.5,183.8,67.4  c20.5-18,42-32.4,64.5-43.3l1.9-1.9h1.9C602.4,81.4,639.9,74,679.1,74c56.5-1.3,108.1,12.5,155,41.4  c46.8,28.9,82.1,68.7,105.9,119.3v1.9l1.9,3.8c19.2,68,22.5,132.8,9.6,194.4c-12.8,61.6-38.5,117.7-77,168.4  c-39.8,56.5-91.8,111.6-155.9,165.5c0,1.3-0.6,1.9-1.9,1.9c-31.4,28.9-65.8,57.7-103,86.6c-21.8,16-40.7,29.2-56.8,39.5  c-21.2,14.8-38.8,22.1-52.9,22.1l-5.8,1.9l-4.8-1.9c-18-1.9-36.9-11.2-56.8-27.9c-6.4-3.8-13.2-9-20.2-15.4s-12.2-10.6-15.4-12.5  H399C241.2,742.6,135.9,633.5,83.3,536v-1.9C51.9,473.8,38.4,406.7,42.9,332.9z M124.7,342.6c-3.8,55.2,6.7,107.2,31.8,155.9  c47.5,86.6,144.7,186.1,291.6,298.4h1.9c3.8,3.8,9.6,9,17.3,15.4c7.7,6.4,13.8,10.9,18.3,13.5c5.1,3.8,9.9,7.1,14.4,9.6  c5.1-1.3,9.6-3.2,13.5-5.8c14.1-9,30.5-20.9,49.1-35.6c37.2-27.6,70.9-55.8,101.1-84.7c60.3-51.3,108.8-103,145.3-155  c68.7-91.1,87.3-186.7,55.8-286.8c-17.3-36.6-42.3-64.8-75.1-84.7c-32.7-19.9-69-29.2-108.8-27.9c-27.6,0-55.2,5.5-82.8,16.4  c-25,14.1-46.8,32.4-65.4,54.9L502,267.5l-33.7-41.4c-33.4-41.7-78.6-65.1-135.7-70.3s-108.8,11.9-155,51  C146.2,242.2,128.5,287.4,124.7,342.6z"></path>
+<path xmlns="http://www.w3.org/2000/svg" class="fill" d="M41.7,332.9c4.5-73.8,29.9-135.1,76-183.8h1.9l1.9-1.9C178.1,98.4,241.9,74,313.1,74  c71.2,0,132.5,22.5,183.8,67.4c19.4-17.3,41.1-31.8,64.5-43.3l1.9-1.9h1.9C601,81.5,639.3,74,677.9,74c56.5-1.3,108.1,12.5,155,41.4  c46.9,28.9,82.2,68.7,105.9,119.3v1.9l1.9,3.8c19.2,68,22.5,132.8,9.6,194.4c-12.8,61.6-38.5,117.7-77,168.4  c-39.7,56.5-91.7,111.7-155.9,165.5c0.1,1-0.6,1.8-1.5,1.9c-0.1,0-0.3,0-0.4,0c-31.5,28.9-65.8,57.7-103,86.6  c-21.8,16.1-40.7,29.2-56.8,39.5c-21.2,14.7-38.8,22.1-52.9,22.1l-5.8,1.9l-4.8-1.9c-18-1.9-36.9-11.3-56.8-27.9  c-7.2-4.4-14-9.6-20.2-15.4c-7-6.4-12.2-10.6-15.4-12.5h-1.9C240,742.7,134.7,633.6,82.1,536v-1.9C50.7,473.7,37.2,406.7,41.7,332.9  z"></path>
+</svg></div><div data-v-7268b4e1="" title="Skip" data-test="skip" class="control skip"><svg data-v-7268b4e1="" viewBox="0 0 249.05 132.12" class="icon icon-skip" xmlns="http://www.w3.org/2000/svg">
+	<circle xmlns="http://www.w3.org/2000/svg" cx="115.5" cy="108.62" r="23"></circle>
+	<path xmlns="http://www.w3.org/2000/svg" d="M291.5,281A22.5,22.5,0,1,1,269,303.5,22.52,22.52,0,0,1,291.5,281m0-1A23.5,23.5,0,1,0,315,303.5,23.5,23.5,0,0,0,291.5,280Z" transform="translate(-176 -194.88)"></path>
+	<path xmlns="http://www.w3.org/2000/svg" class="arrow" d="M399,257.5a135.18,135.18,0,0,0-41.16-42.17c-22.7-14.74-49.38-21.92-75.15-20.2a108.71,108.71,0,0,0-65.16,27c-19.91,17.5-33.76,41.79-41.18,72.19a13.52,13.52,0,0,0,9.92,16.32,13.66,13.66,0,0,0,3.21.38,13.51,13.51,0,0,0,13.11-10.3c6.07-24.92,17.1-44.54,32.76-58.31a82,82,0,0,1,49.13-20.32c20-1.33,40.81,4.32,58.65,15.9A108.07,108.07,0,0,1,374,268.51l-30,13.2,72.43,40.36,8.6-76Z" transform="translate(-176 -194.88)"></path>
+</svg></div><div data-v-7268b4e1="" title="Share" data-test="share" class="control control-twitter"><svg data-v-7268b4e1="" viewBox="0 0 512.004 419.042" xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter"><path xmlns="http://www.w3.org/2000/svg" d="M191.012,466.043a439.3,439.3,0,0,1-67.856-5.387C82.777,454.32,41.9,433.2,30.336,426.875L0,410.289l32.844-10.8c35.9-11.8,57.742-19.129,84.777-30.6-27.07-13.11-47.933-36.692-57.976-67.176L52,278.52l6.266.957A113.977,113.977,0,0,1,44,261.883c-12.934-19.645-19.781-43.649-18.324-64.219l1.437-20.246,12.121,4.695a113.319,113.319,0,0,1-10.98-30.777c-5.293-26.359-.863-54.363,12.476-78.852L51.289,53.1,65.41,70.062c44.66,53.649,101.227,85.473,168.363,94.79-2.742-18.9-.687-37.145,6.114-53.5,7.918-19.039,22-35.183,40.722-46.691A122.322,122.322,0,0,1,351.6,47.23c26.511,1.629,50.582,11.563,69.7,28.747,9.336-2.426,16.215-5.016,25.512-8.516,5.593-2.106,11.937-4.5,19.875-7.231l29.25-10.078-19.075,54.477c1.258-.106,2.555-.2,3.911-.254L512,102.961l-18.461,25.23c-1.059,1.446-1.328,1.856-1.7,2.422-1.488,2.242-3.34,5.032-28.68,38.867-6.344,8.473-9.512,19.508-8.922,31.079,2.246,43.968-3.148,83.75-16.043,118.234C426,351.418,407.1,379.41,382.031,401.992c-31.023,27.938-70.582,47.067-117.582,56.848A361.961,361.961,0,0,1,191.012,466.043Z" transform="translate(0 -47.001)"></path></svg></div></div></div></div> <!----></div></div></div> <div data-v-0b972818="" class="three-col-layout--right" data-resize-sensor-id="04l2cl"><div data-v-45b98c80="" data-v-0b972818="" class="region bottom-right"><div id="todo" class="app-container todo show show-fade-in" data-test="todo" data-justboundclickoutsidehandler="false" data-clickoutsidemouseuphandlerid="7fq40n" data-clickoutsidemousedownhandlerid="glelhl" style=""><div class="app-wrapper nipple nipple-bottom-right">
+	<div class="app todo-app calculates-own-max-height" style="height: auto; width: 320px;">		<div class="drop-zone drop-left-zone">
+			<span class="bar left-bar">
+				<span class="bar-name"></span>
+			</span>
+		</div>
+
+		<div class="drop-zone drop-right-zone">
+			<span class="bar right-bar">
+				<span class="bar-name"></span>
+			</span>
+		</div>
+
+		<header class="header todo-header has-assignee momentum-todo" data-test="todo-header"><div class="todo-header-row">
+	<div class="list-color" style="background-color: rgba(0,0,0,0)"></div>
+
+	
+	<div class=" active-list-container has-icon" data-test="todo-list-chooser">
+		<img class="provider-icon" src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/dashboard.html">
+		<span class="list-name active-list-name " title="Today" data-test="todo-active-list-title">Today</span>
+		<div class="list-chooser-toggle icon-wrapper" style="display: inline-flex;"><svg class="icon icon-angle-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55.751 55.751"><path d="M31.836 43.006c.282-.281.518-.59.725-.912L54.17 20.485a5.403 5.403 0 0 0 0-7.638 5.403 5.403 0 0 0-7.638 0l-18.608 18.61L9.217 12.753A5.4 5.4 0 0 0 0 16.571a5.363 5.363 0 0 0 1.582 3.816l21.703 21.706c.207.323.445.631.729.913a5.367 5.367 0 0 0 3.91 1.572 5.37 5.37 0 0 0 3.912-1.572z"></path></svg></div>
+		<div class="dropdown nipple nipple-top-left">
+			<div class="list-chooser dropdown-list" data-test="todo-list-dropdown"><ul data-test="inbox" data-list-id="1-inbox">
+	<li class="todo-list-choice " data-list-id="1-inbox">
+		<div class="list-color" style="background-color: ">&nbsp;</div>
+		<span class="list-name">Inbox</span>
+		<span class="todo-count">0</span>
+	</li>
+</ul><ul data-test="today" data-list-id="1-today">
+	<li class="todo-list-choice-active " data-list-id="1-today">
+		<div class="list-color" style="background-color: ">&nbsp;</div>
+		<span class="list-name">Today</span>
+		<span class="todo-count">0</span>
+	</li>
+</ul><ul data-test="done" data-list-id="1-done">
+	<li class="todo-list-choice " data-list-id="1-done">
+		<div class="list-color" style="background-color: ">&nbsp;</div>
+		<span class="list-name">Done</span>
+		<span class="todo-count"> </span>
+	</li>
+</ul><ul class="todo-list-add-row">	<div id="list-new" class="upsell-row">
+		<div class="copy">+ New List</div>
+		<span class="badge badge-plus">Plus</span>
+	</div>
+
+</ul></div>
+		</div>
+	</div>
+
+	<div class="todo-header-controls">
+		<div class="todo-header-control more" id="todo-top-menu">	<div class="icon-wrapper more-toggle" data-test="todo-item-dropdown-toggle">
+		<svg class="icon icon-ellipsis more-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><path d="M8 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM52 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zM30 22c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8z"></path></svg>
+	</div>
+<div class="dropdown todo-actions-dropdown">
+	<ul class="dropdown-list"></ul>
+	<ul class="dropdown-list dropdown-detail"></ul>
+</div>
+</div>
+		<div class="todo-header-control mobile-close">
+			<span class="icon-wrapper u--mobile-show-bg hide">
+				<svg class="icon icon-hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348.333 348.334"><path d="M336.559 68.611L231.016 174.165l105.543 105.549c15.699 15.705 15.699 41.145 0 56.85-7.844 7.844-18.128 11.769-28.407 11.769-10.296 0-20.581-3.919-28.419-11.769L174.167 231.003 68.609 336.563c-7.843 7.844-18.128 11.769-28.416 11.769-10.285 0-20.563-3.919-28.413-11.769-15.699-15.698-15.699-41.139 0-56.85l105.54-105.549L11.774 68.611c-15.699-15.699-15.699-41.145 0-56.844 15.696-15.687 41.127-15.687 56.829 0l105.563 105.554L279.721 11.767c15.705-15.687 41.139-15.687 56.832 0 15.705 15.699 15.705 41.145.006 56.844z"></path></svg>
+			</span>
+		</div>
+	</div>
+</div>
+
+
+
+</header>
+
+		<div class="todo-list-wrapper" style="min-height: 152px; max-height: 152px;">
+			<ol class="todo-list is-empty" style="max-height: 152px; min-height: 152px; opacity: 1;" data-test-list-loaded=""><li class="empty">
+	<p class="title empty-title">Add a todo to get started</p>
+		<div class="description empty-link" data-target-list-id="1-inbox" data-use-command="">
+			Switch to Inbox
+			<i class="icon icon-angle-right"></i>
+		</div>
+	<button class="button new-todo-button" data-test="todo-new-empty">New Todo</button>
+</li>
+</ol>
+		</div>
+
+		<footer class="footer-input new-todo-footer" style="visibility: hidden;">
+			<input id="todo-new" class="todo-input todo-new" type="text" placeholder="New Todo" data-test="todo-new-input" autocomplete="off" title="Use Cmd-Enter to create a todo at top of the list">
+		</footer>
+</div>
+	<div class="touch-overlay"></div>
+</div>
+<span class="app-dash toggle Todo-toggle" data-test="todo-app-dash" data-ob="todo-app-dash">Todo</span>
+</div></div></div></div> <!----></div>
+<div class="overlay drop-overlay">
+<p>Drop to upload backgrounds <span class="badge badge-plus">PLUS</span></p>
+</div>
+<div data-v-3c658925="" class="full-screen-portals"><div data-v-3c658925="" class="toast-menu-portal vue-portal-target" data-test="dropdown-portal"></div> <div data-v-51133c55="" data-v-3c658925="" class="dropdown-portal vue-portal-target" data-test="dropdown-portal"></div></div>
+</div>
+<script src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/globals.js"></script>
+<script src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/js/lib.min.js"></script>
+<script src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/es6.js"></script>
+<script src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/app.min.js"></script>
+
+
+<script type="text/javascript" async="" src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/1369894c-efef-4d5f-9bd6-3e136e09c5e8.js" id="1369894c-efef-4d5f-9bd6-3e136e09c5e8"></script><script type="text/javascript" async="" src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/6be10923-c6a7-4e5f-b85a-85e6159c3018.js" id="6be10923-c6a7-4e5f-b85a-85e6159c3018"></script><script type="text/javascript" async="" src="chrome-extension://laookkfknpbbblfpciffpaejjkokdgca/app/7d9ace94-8620-4bc0-9160-fcc15d4cb578.js" id="7d9ace94-8620-4bc0-9160-fcc15d4cb578"></script></body></html>

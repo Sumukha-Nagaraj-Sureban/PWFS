@@ -1,0 +1,45 @@
+body{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.card{
+    margin: 50px auto;
+    width: 350px;
+    height: 400px;
+    position: relative;
+    box-shadow: 0 8px 18px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    background-color: #f1f2ef;
+}
+
+.card__img{
+    width: 95%;
+    height: 200px;
+    margin: 10px;
+}
+
+.card__container{
+    margin: 10px;
+}
+
+.card__head, .card__description, .card__button{
+    margin: 10px;
+}
+
+.card__button{
+    width: 25%;
+    height: 40px;
+}
+
+.card__button--green{
+    background-color: #a9d763;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.card__button--green:hover{
+    cursor: pointer;
+    background-color: #affb3d;
+}

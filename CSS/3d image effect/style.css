@@ -1,0 +1,23 @@
+.container{
+    width: 400px;
+    height: 496px;
+    margin: auto;
+    margin-top: 10%;
+    cursor: pointer;
+}
+
+.container img{
+    width: 100%;
+}
+
+.hover__image{
+    position: relative;
+    bottom: 550px;
+    height: 500px;
+    display: none;
+    transform: translateZ(210px);
+}
+
+.container:hover .hover__image{
+    display: block;
+}
