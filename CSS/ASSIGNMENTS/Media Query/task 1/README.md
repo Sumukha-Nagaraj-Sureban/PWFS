@@ -1,9 +1,9 @@
 # OUTPUT
 
-* Justify-items
+* Desktop View
 
 ![Ouput](output1.png)
 
-* Justify-self
+* Mobile View
 
 ![Ouput](output2.png)
