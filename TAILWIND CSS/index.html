@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screen:{
+            sm:'480px',
+            md:'768px',
+            lg:'976px',
+            xl:'1440px'
+        },
+        extend: {
+          colors: {
+            myblue: '#2475B0',
+            myred: '#D63031',
+            mygray: '#616C6F',
+            mywhite: '#ffffff'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="">
+    <!-- <h1 class="text-mywhite">Lorem, ipsum dolor.</h1> -->
+
+    <!-- building navbar -->
+
+    <!-- <nav class="relative container bg-myred flex text-mywhite width">
+        <div>item-1</div>
+        <div>item-1</div>
+        <div>item-1</div>
+        <div>item-1</div>
+        <div>item-1</div>
+    </nav> -->
+    <!-- <button class="bg-myred px-5 py-2 text-mywhite rounded">click</button> -->
+
+    <!-- <section id="hero">
+        <div class="w-[100%] h-[50px] border-2 text-center md:text-left text-red-600">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, possimus.
+        </div>
+    </section> -->
+
+    <div class="flex flex-col justify-around md:flex-row justify-center">
+        <div class="w-[300px] h-[300px] border-solid border-2 border-black text-center md:text-left">text</div>
+        <div class="w-[300px] h-[300px] border-solid border-2 border-black text-center md:text-left">text</div>
+        <div class="w-[300px] h-[300px] border-solid border-2 border-black text-center md:text-left">text</div>
+    </div>
+</body>
+</html>
