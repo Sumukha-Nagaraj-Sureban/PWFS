@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screen:{
+            sm:'480px',
+            md:'768px',
+            lg:'976px',
+            xl:'1440px'
+        },
+        extend: {
+          colors: {
+            myblue: '#2475B0',
+            myred: '#D63031',
+            mygray: '#616C6F',
+            mywhite: '#ffffff'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+
+    .sumukha{
+        display: flex;
+        justify-content: center;
+    }
+
+    .sumukha-item{
+        height: 100px;
+        width: 100px;
+        border: 2px solid black;
+    }
+  </style>
+</head>
+<body>
+    <div class="flex items-center justify-center">
+        <div class="p-2 bg-yellow-200 h-[100px]">block 1</div>
+        <div class="p-2 bg-blue-200 h-[100px]">block 2</div>
+        <div class="p-2 bg-green-200 h-[100px]">block 2</div>
+        <div class="p-2 bg-red-200 h-[100px]">block 4</div>
+    </div>
+
+    <div class="sumukha">
+        <div class="sumukha-item"></div>
+        <div class="sumukha-item"></div>
+        <div class="sumukha-item"></div>
+        <div class="sumukha-item"></div>
+    </div>
+</body>
+</html>
