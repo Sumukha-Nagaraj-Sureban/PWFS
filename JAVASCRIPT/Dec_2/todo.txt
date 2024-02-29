@@ -1,0 +1,18 @@
+string methods 
+array methods
+object
+callback function
+
+
+-revision
+    -data types
+    -conditions
+    -Math functions
+    -arrays & methods
+    -loops
+    -setTimeout and setInterval
+    -functions and parameters
+    -objects
+    -higher order functions
+    -forEach, map, filter, reduce, every
+    -sort() -> function
